@@ -1,0 +1,3251 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lanzarote s klukama</title>
+<meta name="robots" content="noindex, nofollow"><!-- rodinný deník jen pro ty, kdo mají odkaz: nehledat ve vyhledávačích -->
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap">
+<style>
+/* Deník z cesty: dny ve sloupci vedle zápisu (na mobilu nahoře), v každém dni video, úvod, jedna galerie a text. Barvy: mokrý mramor Opery, fjord, červené svetry kluků. */
+:root {
+  --bg: #f4f1ec;          /* písek */
+  --paper: #ffffff;
+  --ink: #1f1c1a;
+  --muted: #6b625a;
+  --line: #e2dad0;
+  --fjord: #1d6a85;
+  --sweater: #c4552a;
+  --stage: #151210;       /* pozadí za fotkou v galerii, v obou režimech tmavé */
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "Literata", Georgia, "Times New Roman", serif;
+  --step-0: 1.125rem;
+  --step-lead: clamp(1.2rem, 1.05rem + .6vw, 1.45rem);
+  --step-2: clamp(1.5rem, 1.15rem + 1.4vw, 2rem);
+  --step-3: clamp(2.6rem, 1.6rem + 5vw, 4.6rem);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141210; --paper: #1d1a17; --ink: #ece6df; --muted: #ab9f93; --line: #353029;
+    --fjord: #7fc0d6; --sweater: #ee8a5a; --stage: #0c0a09; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141210; --paper: #1d1a17; --ink: #ece6df; --muted: #ab9f93; --line: #353029;
+  --fjord: #7fc0d6; --sweater: #ee8a5a; --stage: #0c0a09; color-scheme: dark;
+}
+[hidden] { display: none !important; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 var(--step-0)/1.65 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1120px; margin: 0 auto; padding-block: 40px 72px; display: grid; gap: 40px; }
+main { display: grid; gap: 40px; min-width: 0; }
+/* počítač: vlevo sloupec dnů, vpravo nadpis, zápis a patička */
+@media (min-width: 880px) {
+  .wrap { grid-template-columns: 13rem minmax(0, 1fr); column-gap: 48px; }
+  .wrap > header, main, .wrap > footer { grid-column: 2; }
+}
+.col { max-width: 40rem; margin: 0 auto; width: 100%; min-width: 0; }
+
+header { display: grid; gap: 10px; }
+.kicker { font: 700 .8rem/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--sweater); }
+h1 { font: 800 var(--step-3)/.95 var(--display); letter-spacing: -.02em; margin: 0; text-wrap: balance; }
+.who { color: var(--muted); margin: 4px 0 0; font-size: 1.05rem; }
+
+/* dny: na mobilu dva sloupce pod nadpisem, na počítači jeden sloupec vlevo */
+.days { display: grid; gap: 8px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.days a, .days span {
+  display: grid; gap: 2px; align-content: start; padding: 10px 14px; border-radius: 10px; text-decoration: none;
+  border: 1px solid var(--line); background: var(--paper); color: var(--ink); min-width: 0;
+}
+.days b { font: 700 .95rem/1.2 var(--display); }
+.days small { font: 500 .8rem/1.25 var(--display); color: var(--muted); }
+.days a:hover { border-color: var(--fjord); }
+.days a[aria-current="page"] { background: var(--fjord); border-color: var(--fjord); color: var(--bg); }
+.days a[aria-current="page"] small { color: var(--bg); opacity: .85; }
+/* dny, které teprve přijdou: šedé, čárkovaný rámeček, nedají se otevřít */
+.days .soon { border-style: dashed; background: transparent; color: var(--muted); }
+.days .soon b { font-weight: 500; }
+.days .soon.today { border-color: var(--sweater); }
+.days a:focus-visible, button:focus-visible { outline: 3px solid var(--fjord); outline-offset: 2px; }
+@media (min-width: 880px) {
+  .days { grid-column: 1; grid-row: 2 / span 2; align-self: start; position: sticky; top: 24px; grid-template-columns: 1fr; }
+}
+
+.entry { display: grid; gap: 40px; }
+.entry-head { display: grid; gap: 8px; }
+.date { font: 700 .8rem/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+h2 { font: 700 var(--step-2)/1.15 var(--display); letter-spacing: -.01em; margin: 0; text-wrap: balance; }
+.entry-head h2 { font-size: clamp(2rem, 1.4rem + 2.4vw, 3rem); font-weight: 800; }
+.lead { font-size: var(--step-lead); line-height: 1.55; margin-block: 0; }
+.label { font: 700 .8rem/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+  display: flex; align-items: center; gap: 12px; margin: 0; }
+.label::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+/* video: přehrávač YouTube, dokud tam není odkaz, jen náhled */
+.film { display: grid; gap: 10px; }
+.film-frame { position: relative; aspect-ratio: 16 / 9; max-width: 100%; background: #000; border-radius: 8px; overflow: hidden; }
+.film-frame iframe, .film-frame img { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
+.film-frame img { opacity: .8; }
+.film-soon {
+  position: absolute; left: 12px; bottom: 12px; max-width: calc(100% - 24px); display: grid; gap: 4px; color: #fff;
+  background: rgba(10, 14, 18, .75); border-radius: 10px; padding: 12px 16px;
+  font: 700 clamp(1.05rem, .9rem + .8vw, 1.35rem)/1.2 var(--display);
+}
+.film-soon small { font: 500 .95rem/1.4 var(--display); opacity: .85; }
+.film-cap { font: 500 1rem/1.4 var(--display); color: var(--muted); margin: 0; }
+
+/* galerie: velká fotka a pás náhledů pod ní */
+.gal { display: grid; gap: 10px; min-width: 0; }
+.gal-stage { position: relative; aspect-ratio: 3 / 2; max-width: 100%; background: var(--stage); border-radius: 8px; overflow: hidden; }
+.gal-stage > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; cursor: zoom-in; }
+.gal-nav {
+  position: absolute; top: 50%; translate: 0 -50%; width: 48px; height: 48px; border-radius: 50%; border: 0;
+  background: rgba(10, 14, 18, .55); color: #fff; font: 700 1.4rem/1 var(--display); cursor: pointer;
+}
+.gal-nav:hover { background: rgba(10, 14, 18, .8); }
+.gal-prev { left: 10px; } .gal-next { right: 10px; }
+.gal-count, .gal-full {
+  position: absolute; bottom: 10px; font: 600 .85rem/1 var(--display); color: #fff;
+  background: rgba(10, 14, 18, .6); border-radius: 999px; padding: 8px 12px; font-variant-numeric: tabular-nums;
+}
+.gal-count { left: 10px; }
+.gal-full { right: 10px; border: 0; cursor: pointer; }
+.gal-cap { font: 500 1rem/1.4 var(--display); color: var(--muted); margin: 0; min-height: 1.4em; }
+.gal-strip { display: flex; gap: 6px; overflow-x: auto; padding: 2px 2px 8px; scroll-behavior: smooth; scrollbar-width: thin; }
+.gal-strip button { flex: none; padding: 0; border: 2px solid transparent; border-radius: 6px; background: none; cursor: pointer; opacity: .7; }
+.gal-strip button:hover { opacity: 1; }
+.gal-strip button[aria-current="true"] { border-color: var(--sweater); opacity: 1; }
+.gal-strip img { display: block; height: 64px; width: auto; border-radius: 4px; background: var(--line); }
+@media (prefers-reduced-motion: reduce) { .gal-strip { scroll-behavior: auto; } }
+
+/* text */
+.text-block { display: grid; gap: 48px; }
+section { display: grid; gap: 16px; }
+p { margin: 0; }
+.text { display: grid; gap: 1em; }
+blockquote { margin: 0; padding: 4px 0 4px 18px; border-left: 3px solid var(--sweater); font-style: italic; }
+.next { border-top: 1px solid var(--line); padding-top: 24px; color: var(--muted); }
+.next b { color: var(--ink); }
+
+footer { color: var(--muted); font: 500 .95rem/1.5 var(--display); text-align: center; }
+
+/* fotka přes celou obrazovku */
+.viewer {
+  position: fixed; inset: 0; z-index: 20; background: rgba(6, 9, 12, .97); display: grid;
+  grid-template-rows: auto 1fr auto; color: #f1f4f6;
+  padding: env(safe-area-inset-top, 0px) max(8px, env(safe-area-inset-right, 0px)) env(safe-area-inset-bottom, 0px) max(8px, env(safe-area-inset-left, 0px));
+}
+.viewer .bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 4px; font: 500 .95rem/1.3 var(--display); }
+.viewer .stage { position: relative; min-height: 0; }
+.viewer .stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.viewer .nav { display: flex; justify-content: space-between; align-items: center; padding: 8px 4px 12px; gap: 12px; font-variant-numeric: tabular-nums; }
+.viewer button {
+  font: 600 1rem/1 var(--display); color: #f1f4f6; background: rgba(255,255,255,.12);
+  border: 0; border-radius: 999px; padding: 12px 18px; cursor: pointer; flex: none;
+}
+.viewer button:hover { background: rgba(255,255,255,.22); }
+.viewer button:focus-visible { outline: 3px solid #7fc0d6; outline-offset: 2px; }
+.zpet { font: 600 .95rem/1 var(--display); color: var(--fjord); text-decoration: none; margin-bottom: 14px; }
+
+.film-frame video { position: absolute; inset: 0; width: 100%; height: 100%; background: #000; }
+/* nákres dne: vlastní SVG bez mapového podkladu, funguje bez internetu */
+:root { --more: #dcebef; --pisek: #efe2cb; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --more: #172329; --pisek: #3a3027; } }
+:root[data-theme="dark"] { --more: #172329; --pisek: #3a3027; }
+.mapa { display: grid; gap: 14px; }
+.nakres { width: 100%; height: auto; display: block; font-family: var(--display); }
+.sk-more { fill: var(--more); }
+.sk-ostrov { fill: var(--pisek); stroke: var(--muted); stroke-width: 1; stroke-linejoin: round; }
+.sk-ostrov-jm { fill: var(--muted); font: italic 500 13px var(--display); letter-spacing: .08em; opacity: .8; }
+.sk-meritko path, .sk-sever path { stroke: var(--muted); stroke-width: 2; fill: none; }
+.sk-meritko text, .sk-sever text { fill: var(--muted); font: 600 12px var(--display); }
+.sk-cesta { fill: none; stroke: var(--sweater); stroke-width: 3; stroke-dasharray: 7 6; stroke-linecap: round; }
+.sk-dum-okoli { fill: var(--fjord); opacity: .2; }
+.sk-dum { fill: var(--fjord); stroke: var(--paper); stroke-width: 1.5; stroke-linejoin: round; }
+.sk-letiste { fill: var(--muted); stroke: var(--paper); stroke-width: 2; }
+.sk-vylet { fill: var(--sweater); stroke: var(--paper); stroke-width: 2; }
+.sk-znak { fill: #fff; font: 13px system-ui, sans-serif; }
+.sk-cislo { fill: #fff; font: 700 13px var(--display); }
+.sk-popis { fill: var(--ink); font: 600 17px var(--display); paint-order: stroke; stroke: var(--pisek); stroke-width: 4px; stroke-linejoin: round; }
+.sk-let { fill: var(--ink); font: 600 17px var(--display); }
+.mapa-seznam { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.mapa-seznam li { display: flex; gap: 10px; align-items: baseline; font: 500 .95rem/1.35 var(--display); }
+.mapa-seznam li > i { flex: none; width: 1.6em; height: 1.6em; border-radius: 50%; display: grid; place-items: center;
+  font: normal 700 .75rem/1 var(--display); color: #fff; background: var(--m, var(--sweater)); }
+.mapa-seznam li > div { flex: 1; display: flex; flex-wrap: wrap; column-gap: 10px; }
+.mapa-seznam li span { color: var(--muted); margin-left: auto; white-space: nowrap; }
+.mapa-seznam q { quotes: "„" "“" "‚" "‘"; flex-basis: 100%; font: italic 400 1rem/1.45 var(--body); color: var(--muted); margin-top: 2px; }
+.m-bydlení { --m: var(--fjord); } .m-letiště { --m: var(--muted); }
+.zpet { font: 600 .95rem/1 var(--display); color: var(--fjord); text-decoration: none; margin-bottom: 14px; }
+/* Pavlův zápis z blogu */
+.blog { display: grid; gap: 0; }
+.blog h3 { font: 700 var(--step-2)/1.15 var(--display); margin: 14px 0 6px; text-wrap: balance; }
+.blog h4 { font: 700 1.05rem/1.3 var(--display); margin: 1.2em 0 0; }
+.blog p:not(.label) { margin: .7em 0 0; }
+.blog-zdroj { font: 500 .9rem/1.4 var(--display); color: var(--muted); }
+.blog-zdroj a { color: var(--fjord); }
+</style>
+
+<div class="wrap">
+  <header class="col">
+    <a class="zpet" href="../">← Cesty s klukama</a>
+    <span class="kicker">Deník z dovolené · 12.–24. 8. 2025</span>
+    <h1>Lanzarote s klukama</h1>
+    <p class="who">Pavel, Šárka, Máťa a Tomík. Každý den video, nákres, kam jsme jeli, tátův zápis z blogu a fotky.</p>
+  </header>
+
+  <nav class="days" id="days" aria-label="Dny"></nav>
+
+  <main>
+
+  <article class="entry" id="den01" data-short="Út 12. 8." data-title="Praha, Brusel, Lanzarote" hidden>
+    <div class="entry-head col">
+      <span class="date">Úterý 12. srpna</span>
+      <h2>Praha, Brusel, Lanzarote</h2>
+    </div>
+
+    <section class="film" aria-label="Video" data-youtube="https://youtu.be/_veTJ-0NHU4" data-src="" data-poster="den01/video/nahled.jpg" data-title="Lanzarote – Praha, Brusel, Lanzarote">
+      <div class="film-frame"></div>
+      <p class="film-cap">Vlog · Út 12. 8. · 6:12</p>
+    </section>
+
+    <p class="lead col">Balili jsme do dvou do rána a vstávali v pět. Na letišti v Praze tři kolony, pak přestup v Bruselu, kde Máťa nabíjel mobil šlapáním na kole, a večer přílet na Lanzarote. Tomík alias pan Chameleon se těšil hlavně na ještěrky.</p>
+
+    <section class="mapa col" aria-label="Nákres dne">
+      <p class="label">Kam jsme se vydali</p>
+      <svg class="nakres" viewBox="0 0 591 637" role="img" aria-label="Nákres ostrova: letiště, náš dům přibližně a kam jsme se vydali – u moře u domu"><rect class="sk-more" width="591" height="637" rx="10"/><path class="sk-ostrov" d="M61.9,525.1 L68.9,534.8 L66.6,550.0 L71.3,560.4 L90.3,552.2 L97.8,553.5 L104.5,559.8 L108.3,556.6 L109.2,559.6 L113.0,557.1 L110.2,558.6 L112.3,555.2 L109.4,555.4 L115.4,551.4 L126.8,553.8 L127.9,555.3 L125.9,556.5 L126.6,557.6 L129.5,555.6 L131.5,559.0 L124.9,557.3 L133.3,560.7 L142.6,555.8 L153.0,565.1 L157.5,579.3 L170.5,568.4 L173.1,558.3 L184.6,545.6 L195.9,537.8 L195.0,529.7 L201.5,510.6 L209.0,500.7 L217.1,501.5 L234.2,490.6 L254.5,485.5 L301.7,486.3 L312.6,476.6 L318.3,477.6 L335.9,469.1 L338.8,461.6 L348.7,452.5 L371.0,445.1 L380.0,445.8 L387.1,441.5 L404.4,441.2 L406.4,439.6 L408.1,436.3 L411.0,437.8 L408.2,436.0 L412.4,430.2 L408.2,432.7 L405.8,439.6 L403.4,437.0 L416.3,424.0 L415.7,431.2 L419.8,426.3 L415.6,438.6 L422.5,419.9 L426.0,422.7 L430.4,414.9 L434.8,414.9 L437.8,409.4 L450.8,401.5 L460.1,402.0 L457.7,395.6 L466.5,392.1 L470.1,386.8 L470.0,377.5 L477.5,376.2 L481.7,371.4 L482.8,365.4 L477.2,354.4 L482.9,341.2 L479.8,330.1 L485.2,325.9 L499.0,288.5 L497.7,277.6 L490.6,273.8 L491.3,269.8 L482.4,260.8 L481.7,246.5 L496.6,227.9 L499.7,228.5 L500.1,224.3 L518.6,214.6 L519.4,205.1 L522.3,202.8 L519.0,199.5 L526.5,181.6 L527.1,161.5 L522.4,157.1 L523.0,153.7 L513.6,152.5 L508.5,143.7 L500.7,142.7 L500.8,139.8 L497.6,139.7 L498.2,137.5 L496.4,137.5 L497.0,137.2 L496.9,135.0 L496.1,133.9 L494.0,132.7 L496.6,135.2 L495.2,138.5 L491.8,133.5 L480.4,132.9 L476.0,116.3 L468.7,130.8 L449.1,142.6 L448.6,155.1 L444.1,155.6 L439.8,162.0 L432.6,188.5 L423.9,199.5 L423.0,212.0 L425.2,213.9 L421.8,230.5 L400.8,255.8 L386.5,260.6 L361.7,239.9 L348.8,236.6 L342.0,236.9 L333.7,245.6 L323.7,247.2 L312.4,260.3 L306.0,258.9 L303.4,250.4 L292.7,254.1 L287.1,251.2 L282.8,257.3 L288.6,263.8 L283.3,263.5 L263.9,274.2 L264.3,280.2 L256.8,287.6 L243.3,289.7 L237.8,301.7 L221.8,295.4 L217.7,300.0 L192.8,302.6 L186.9,306.3 L182.0,317.7 L177.4,320.1 L175.4,317.0 L172.5,321.7 L165.6,322.1 L161.2,328.6 L151.1,333.7 L145.1,345.1 L127.9,356.4 L127.3,363.0 L114.6,385.1 L114.3,397.3 L110.4,405.6 L115.8,420.3 L109.6,428.3 L114.0,439.5 L110.3,445.1 L112.1,457.1 L109.9,462.0 L115.5,473.5 L104.3,488.0 L96.6,490.8 L92.4,500.1 L87.2,503.4 L86.2,511.5 L70.8,515.4 L61.9,525.1 Z"/><path class="sk-ostrov" d="M397.1,133.6 L401.4,141.8 L408.6,139.3 L412.1,144.4 L415.1,140.2 L423.6,141.3 L431.1,133.3 L441.0,134.2 L444.0,132.2 L441.4,132.4 L442.5,128.5 L444.7,132.9 L445.9,125.0 L456.8,112.3 L459.3,98.8 L473.4,90.2 L472.9,82.3 L464.0,72.8 L451.6,72.9 L439.1,59.5 L434.9,59.2 L430.8,64.9 L429.9,76.7 L424.7,82.2 L425.6,96.2 L417.4,103.9 L420.0,114.9 L400.0,126.1 L397.1,133.6 Z"/><text class="sk-ostrov-jm" x="441.2" y="66.2" text-anchor="middle">La Graciosa</text><text class="sk-ostrov-jm" x="245.2" y="313.0">LANZAROTE</text><g class="sk-meritko"><path d="M20,615 h103"/><text x="71.5" y="607" text-anchor="middle">10 km</text></g><g class="sk-sever"><path d="M561,619 l0,-34 m-7,10 l7,-10 l7,10"/><text x="561" y="635" text-anchor="middle">S</text></g><path class="sk-cesta" d="M336.6,449.8 Q342.2,453.1 348.7,452.1"/><circle class="sk-letiste" cx="336.6" cy="449.8" r="11"/><text class="sk-znak" x="336.6" y="454.3" text-anchor="middle">✈&#xFE0E;</text><circle class="sk-dum-okoli" cx="348.7" cy="452.1" r="17"/><path class="sk-dum" d="M340.7,459.1 v-8 l8,-7 l8,7 v8 Z"/><text class="sk-popis" x="324.6" y="437.8" text-anchor="end">letiště</text><text class="sk-popis" x="356.7" y="478.1" text-anchor="start">náš dům (přibližně)</text><text class="sk-let" x="22" y="36">✈&#xFE0E; Praha → Brusel → Lanzarote</text></svg>
+      <ol class="mapa-seznam"><li class="m-letiště"><i>✈&#xFE0E;</i><div><b>Letiště Praha</b><span>10:02–11:43</span></div></li><li class="m-letiště"><i>✈&#xFE0E;</i><div><b>Přestup v Bruselu</b><span>13:34–15:59</span></div></li><li class="m-letiště"><i>✈&#xFE0E;</i><div><b>Letiště Lanzarote</b><span>19:15–19:52</span><q>Přistání v Arrecife bylo rychlé.</q></div></li><li class="m-bydlení"><i>⌂</i><div><b>Playa Honda – tady jsme bydleli (přibližně)</b><span>20:14</span></div></li></ol>
+    </section>
+
+
+    <section class="blog col" aria-label="Zápis z blogu">
+      <p class="label">Tátův zápis z blogu</p>
+      
+      <p>Jedenáctého srpna.</p><p>V kalendáři červeně zakroužkované datum, ke kterému jsme se propracovávali už týdny. V hlavě jasný plán – ráno začneme balit, odpoledne máme hotovo, večer klid. Realita? Ráno jsme začali, odpoledne jsme měli pocit, že jsme hotoví, večer jsme zjistili, že nejsme ani v půlce, a ve dvě ráno jsme konečně zavřeli kufry… s tím, že ještě spoustu věcí doděláme ráno.</p><p>Tři hodiny spánku jsou na dovolenou zvláštní start. V pět ráno zazvonil budík a nastal první rodičovský úkol dne: vytáhnout děti z postele. Kupodivu to šlo hladce. Možná proto, že jsem jim slíbil, že si v letadle můžou vybrat film. Možná proto, že ještě pořád spali se zavřenýma očima, jen už u toho stáli v kuchyni.</p><p>Cesta do Prahy začala slibně. Dokud jsme nenajeli na pražský okruh. Černý Most – kolona. Barrandovský most – kolona. Kousek před letištěm – další kolona. Naštěstí jsem si nechal časovou rezervu, protože s dětmi nikdy nevíte. Rezerva je jako padák – doufáte, že ho nebudete potřebovat, ale když přijde krize, zachrání vám den.</p><p>Parkování na „Go Parking“ proběhlo podle plánu. Přijel pán s minivanem, naložil kufry, nás, a během pěti minut jsme stáli před terminálem. Tam přišla Máťova chvíle. Dostal číslo letu a úkol: podle odletové tabule dovést rodinu až ke správné bráně. Vzal to vážně. Vypadal u toho jako osmiletý manažer letiště – kráčel chodbami, občas kontroloval tabuli a pak ukázal: „Tudy.“ Přivedl nás přesně tam, kam měl.</p><p>Pak přišel Tomík. „Já si kufr ponesu sám!“ Tři kroky, zakopnutí, konec mise. Kufr zpátky rodičům. Máťa se smál… a o dvacet metrů dál udělal úplně to samé. Zavazadla tak definitivně přešla do rodičovské správy.</p><p>U gatu se objevila nabídka, která by se dala vytesat do cestovatelských desater: příruční zavazadla zdarma až do cílové destinace. Žádné tahání při přestupu v Bruselu. Souhlasil jsem okamžitě. Do jednoho kufru jsem dal AirTag – protože jistota, že naše věci poletí s námi, není nikdy na škodu.</p><p>První let do Bruselu byl krátký, ale měl jednu zásadní výhodu – dost času mezi přistáním a dalším odletem. A hlavně – piknik. Doma jsem udělal sendviče a špízy pro celou rodinu. V bruselské hale jsme si je rozložili na stole, vedle nás Matěj na stanovišti s rotopedem šlapal, aby si nabil telefon. Tomík si u toho dával sušenku a vypadal, že jsme na pikniku spíš než na cestě přes půl Evropy. Fotka z letadla, kde si ty špízy dáváme, bude mít v blogu čestné místo.</p><p>Druhý let na Lanzarote trval čtyři hodiny a pět minut. Místa málo, nohy nikam, lokty střídavě moje a sousedovy. Přemýšlel jsem, jestli by se pravidla o zákazu klecových chovů neměla vztahovat i na ekonomickou třídu.</p><p>Přistání v Arrecife bylo rychlé. Kufry jsme měli mezi prvními, auto místo slíbeného Hyundai i30 byla Škoda Kamiq – a k mému překvapení lepší, než jsem čekal. Udělali jsme si fotku auta, a hned i fotky všech škrábanců, které už na něm byly. Ne že bych nevěřil půjčovně, ale člověk nikdy neví.</p><p>Cesta na ubytování byla jednoduchá: dvě odbočky doprava, jedna doleva, pár rovinek. Parkovali jsme sice až na pátý pokus, ale byli jsme tu. Ještě rychlý nákup v Lidlu – zásoby na snídaně, večeře a samozřejmě dětské sušenky, bez kterých by dovolená neprošla. 195 eur a zpět. Děti do postele, my k večeři.</p><p>Sedl jsem si… a probudil se o hodinu později. První den za námi.</p>
+    </section>
+
+    <section class="gal" aria-label="Fotky">
+      <p class="label">Fotky · 31</p>
+      <script type="application/json" class="gal-data">[
+[
+"den01/fotky/IMG_6604.jpg",
+"10:03",
+"Fotka z úterý 12. srpna"
+],
+[
+"den01/fotky/IMG_6607.jpg",
+"10:04 · Kluci s kufry",
+"kluci s kufry"
+],
+[
+"den01/fotky/IMG_6610.jpg",
+"10:07",
+"Fotka z úterý 12. srpna"
+],
+[
+"den01/fotky/IMG_6612.jpg",
+"10:13",
+"Fotka z úterý 12. srpna"
+],
+[
+"den01/fotky/IMG_6614.jpg",
+"11:09",
+"Fotka z úterý 12. srpna"
+],
+[
+"den01/fotky/IMG_6618.jpg",
+"11:44 · Šárka v letadle",
+"Šárka v letadle"
+],
+[
+"den01/fotky/IMG_6619.jpg",
+"12:12",
+"Fotka z úterý 12. srpna"
+],
+[
+"den01/fotky/IMG_6620.jpg",
+"12:14",
+"Fotka z úterý 12. srpna"
+],
+[
+"den01/fotky/IMG_6621.jpg",
+"12:53",
+"Fotka z úterý 12. srpna"
+],
+[
+"den01/fotky/IMG_6622.jpg",
+"12:56 · Mapa Lanzarote v letadle",
+"mapa Lanzarote v letadle"
+],
+[
+"den01/fotky/IMG_6625.jpg",
+"13:36",
+"Fotka z úterý 12. srpna"
+],
+[
+"den01/fotky/IMG_6626.jpg",
+"13:36",
+"Fotka z úterý 12. srpna"
+],
+[
+"den01/fotky/IMG_6627.jpg",
+"13:37 · Tomík na letišti",
+"Tomík na letišti"
+],
+[
+"den01/fotky/IMG_6628.jpg",
+"13:37",
+"Fotka z úterý 12. srpna"
+],
+[
+"den01/fotky/IMG_6629.jpg",
+"13:42",
+"Fotka z úterý 12. srpna"
+],
+[
+"den01/fotky/IMG_6630.jpg",
+"13:43 · Tomík u hrací stěny",
+"Tomík u hrací stěny"
+],
+[
+"den01/fotky/IMG_6631.jpg",
+"13:44",
+"Fotka z úterý 12. srpna"
+],
+[
+"den01/fotky/IMG_6632.jpg",
+"13:49",
+"Fotka z úterý 12. srpna"
+],
+[
+"den01/fotky/IMG_6636.jpg",
+"13:55",
+"Fotka z úterý 12. srpna"
+],
+[
+"den01/fotky/IMG_6637.jpg",
+"13:59",
+"Fotka z úterý 12. srpna"
+],
+[
+"den01/fotky/IMG_6639.jpg",
+"14:23",
+"Fotka z úterý 12. srpna"
+],
+[
+"den01/fotky/IMG_6640.jpg",
+"14:23 · Šárka v letadle",
+"Šárka v letadle"
+],
+[
+"den01/fotky/IMG_6641.jpg",
+"14:41",
+"Fotka z úterý 12. srpna"
+],
+[
+"den01/fotky/IMG_6642.jpg",
+"14:41",
+"Fotka z úterý 12. srpna"
+],
+[
+"den01/fotky/IMG_6643.jpg",
+"14:41",
+"Fotka z úterý 12. srpna"
+],
+[
+"den01/fotky/IMG_6648.jpg",
+"15:49 · Jídlo z domova",
+"jídlo z domova"
+],
+[
+"den01/fotky/IMG_6649.jpg",
+"15:50",
+"Fotka z úterý 12. srpna"
+],
+[
+"den01/fotky/IMG_6655.jpg",
+"15:52 · Svačina v letadle",
+"svačina v letadle"
+],
+[
+"den01/fotky/IMG_6656.jpg",
+"15:52",
+"Fotka z úterý 12. srpna"
+],
+[
+"den01/fotky/IMG_6659.jpg",
+"19:20 · Přílet, letiště Lanzarote",
+"přílet, letiště Lanzarote"
+],
+[
+"den01/fotky/IMG_6660.jpg",
+"19:22 · Čekání na kufry",
+"čekání na kufry"
+]
+]</script>
+    </section>
+
+  </article>
+  <article class="entry" id="den02" data-short="St 13. 8." data-title="První den u moře" hidden>
+    <div class="entry-head col">
+      <span class="date">Středa 13. srpna</span>
+      <h2>První den u moře</h2>
+    </div>
+
+    <section class="film" aria-label="Video" data-youtube="https://youtu.be/INWobklVvL4" data-src="" data-poster="den02/video/nahled.jpg" data-title="Lanzarote – První den u moře">
+      <div class="film-frame"></div>
+      <p class="film-cap">Vlog · St 13. 8. · 3:23</p>
+    </section>
+
+    <p class="lead col">Ráno východ slunce na pláži Playa Honda, kluci tančí na promenádě, odpoledne pískové hrady a nanuky. Večer rychlá dráha na náměstí, nad hlavou letadla a otázka dne: uděláme dneska vlog?</p>
+
+    <section class="mapa col" aria-label="Nákres dne">
+      <p class="label">Kam jsme se vydali</p>
+      <svg class="nakres" viewBox="0 0 591 637" role="img" aria-label="Nákres ostrova: letiště, náš dům přibližně a kam jsme se vydali – u moře u domu"><rect class="sk-more" width="591" height="637" rx="10"/><path class="sk-ostrov" d="M61.9,525.1 L68.9,534.8 L66.6,550.0 L71.3,560.4 L90.3,552.2 L97.8,553.5 L104.5,559.8 L108.3,556.6 L109.2,559.6 L113.0,557.1 L110.2,558.6 L112.3,555.2 L109.4,555.4 L115.4,551.4 L126.8,553.8 L127.9,555.3 L125.9,556.5 L126.6,557.6 L129.5,555.6 L131.5,559.0 L124.9,557.3 L133.3,560.7 L142.6,555.8 L153.0,565.1 L157.5,579.3 L170.5,568.4 L173.1,558.3 L184.6,545.6 L195.9,537.8 L195.0,529.7 L201.5,510.6 L209.0,500.7 L217.1,501.5 L234.2,490.6 L254.5,485.5 L301.7,486.3 L312.6,476.6 L318.3,477.6 L335.9,469.1 L338.8,461.6 L348.7,452.5 L371.0,445.1 L380.0,445.8 L387.1,441.5 L404.4,441.2 L406.4,439.6 L408.1,436.3 L411.0,437.8 L408.2,436.0 L412.4,430.2 L408.2,432.7 L405.8,439.6 L403.4,437.0 L416.3,424.0 L415.7,431.2 L419.8,426.3 L415.6,438.6 L422.5,419.9 L426.0,422.7 L430.4,414.9 L434.8,414.9 L437.8,409.4 L450.8,401.5 L460.1,402.0 L457.7,395.6 L466.5,392.1 L470.1,386.8 L470.0,377.5 L477.5,376.2 L481.7,371.4 L482.8,365.4 L477.2,354.4 L482.9,341.2 L479.8,330.1 L485.2,325.9 L499.0,288.5 L497.7,277.6 L490.6,273.8 L491.3,269.8 L482.4,260.8 L481.7,246.5 L496.6,227.9 L499.7,228.5 L500.1,224.3 L518.6,214.6 L519.4,205.1 L522.3,202.8 L519.0,199.5 L526.5,181.6 L527.1,161.5 L522.4,157.1 L523.0,153.7 L513.6,152.5 L508.5,143.7 L500.7,142.7 L500.8,139.8 L497.6,139.7 L498.2,137.5 L496.4,137.5 L497.0,137.2 L496.9,135.0 L496.1,133.9 L494.0,132.7 L496.6,135.2 L495.2,138.5 L491.8,133.5 L480.4,132.9 L476.0,116.3 L468.7,130.8 L449.1,142.6 L448.6,155.1 L444.1,155.6 L439.8,162.0 L432.6,188.5 L423.9,199.5 L423.0,212.0 L425.2,213.9 L421.8,230.5 L400.8,255.8 L386.5,260.6 L361.7,239.9 L348.8,236.6 L342.0,236.9 L333.7,245.6 L323.7,247.2 L312.4,260.3 L306.0,258.9 L303.4,250.4 L292.7,254.1 L287.1,251.2 L282.8,257.3 L288.6,263.8 L283.3,263.5 L263.9,274.2 L264.3,280.2 L256.8,287.6 L243.3,289.7 L237.8,301.7 L221.8,295.4 L217.7,300.0 L192.8,302.6 L186.9,306.3 L182.0,317.7 L177.4,320.1 L175.4,317.0 L172.5,321.7 L165.6,322.1 L161.2,328.6 L151.1,333.7 L145.1,345.1 L127.9,356.4 L127.3,363.0 L114.6,385.1 L114.3,397.3 L110.4,405.6 L115.8,420.3 L109.6,428.3 L114.0,439.5 L110.3,445.1 L112.1,457.1 L109.9,462.0 L115.5,473.5 L104.3,488.0 L96.6,490.8 L92.4,500.1 L87.2,503.4 L86.2,511.5 L70.8,515.4 L61.9,525.1 Z"/><path class="sk-ostrov" d="M397.1,133.6 L401.4,141.8 L408.6,139.3 L412.1,144.4 L415.1,140.2 L423.6,141.3 L431.1,133.3 L441.0,134.2 L444.0,132.2 L441.4,132.4 L442.5,128.5 L444.7,132.9 L445.9,125.0 L456.8,112.3 L459.3,98.8 L473.4,90.2 L472.9,82.3 L464.0,72.8 L451.6,72.9 L439.1,59.5 L434.9,59.2 L430.8,64.9 L429.9,76.7 L424.7,82.2 L425.6,96.2 L417.4,103.9 L420.0,114.9 L400.0,126.1 L397.1,133.6 Z"/><text class="sk-ostrov-jm" x="441.2" y="66.2" text-anchor="middle">La Graciosa</text><text class="sk-ostrov-jm" x="245.2" y="313.0">LANZAROTE</text><g class="sk-meritko"><path d="M20,615 h103"/><text x="71.5" y="607" text-anchor="middle">10 km</text></g><g class="sk-sever"><path d="M561,619 l0,-34 m-7,10 l7,-10 l7,10"/><text x="561" y="635" text-anchor="middle">S</text></g><circle class="sk-letiste" cx="336.6" cy="449.8" r="11"/><text class="sk-znak" x="336.6" y="454.3" text-anchor="middle">✈&#xFE0E;</text><circle class="sk-dum-okoli" cx="348.7" cy="452.1" r="17"/><path class="sk-dum" d="M340.7,459.1 v-8 l8,-7 l8,7 v8 Z"/><text class="sk-popis" x="324.6" y="437.8" text-anchor="end">letiště</text><text class="sk-popis" x="356.7" y="478.1" text-anchor="start">náš dům (přibližně)</text></svg>
+      <ol class="mapa-seznam"><li class="m-bydlení"><i>⌂</i><div><b>Playa Honda – tady jsme bydleli (přibližně)</b><span>08:36–22:27</span><q>Pláž máme pár minut od domu a už po prvních krocích jsme věděli, že tohle místo bude naší základnou.</q></div></li></ol>
+    </section>
+
+
+    <section class="blog col" aria-label="Zápis z blogu">
+      <p class="label">Tátův zápis z blogu</p>
+      <h3>Zelená letadla plná chameleonů a jeden problémový host</h3>
+      <p>Ráno začalo nezvykle brzy. Kluci se probudili mezi šestou a sedmou a první, co chtěli, bylo — můj mobil a pohádky. Ale jako odpovědný otec jsem zavelel: žádné kreslené postavičky, snídaně a jdeme ven.</p><p>Pláž máme pár minut od domu a už po prvních krocích jsme věděli, že tohle místo bude naší základnou. Dá se tady nejen koupat a stavět hrady, ale i hledat mušle, sépiové kosti a dokonce kousky korálů. Stejné jako na proslulé Popcorn Beach na Fuerteventuře — jen tady v menším množství.</p><p>A pak jsme zjistili, jak blízko máme letiště. A že provoz je tak čilý, že obloha připomíná dopravní křižovatku v pátek odpoledne. Tomík okamžitě přišel s teorií: každé zelené letadlo je plné chameleonů na cestě na dovolenou. V letadle nemají sedačky, ale diskokouli, a gekon u baru rozdává drinky. Když se na obloze objeví zelený trup, okamžitě víme, že v tu chvíli na palubě probíhá party.</p><p>Prošli jsme celou pláž až kam to šlo. Cestou zpět jsme objevili hřiště s originálními houpačkami a prolézačkami. O pár ulic dál jsme narazili na druhé — moderní, a jak jsme večer zjistili, ve skutečnosti to byl obří skatepark.</p><p>Jenže hlavní dění dne se odehrálo doma. V ubytování jsou kamery. Ano, přímo uvnitř. A i když hostitel tvrdil, že jsou nefunkční a přes čočky nalepený papír, moje zkušenost říká, že kamera umí víc než jen „koukat“. Umí slyšet, analyzovat a hlavně — nikdy nevíte, kam signál putuje. Takže jsem napsal jasně: pryč s tím.</p><p>Hostitel začal argumentovat „bezpečností“, já zase „soukromím“ a pravidly Airbnb. Vím přesně, co může být a co ne — sám pronajímám. A tohle už bylo za čárou. Když navrhli, že pošlou technika, řekl jsem, že ať si to řeší s majitelem, já tady nebudu sedět a čekat.</p><p>Do toho jsem objevil další lahůdku — na schodech do patra je mokro, kaluž, která se pomalu zvětšuje. Pro dospělého krok, pro dítě potenciální skluzavka rovnou dolů. Nahlášeno. Přijel opravář, pro něco si sáhl, pak zaznělo tajemné „O-lala!“, nechal nářadí na místě, sedl do auta a zmizel.</p><p>Jelikož už byli v pohybu, přihodil jsem prosbu o sušák a utěrky. Přivezli. Ale chybí nám pořád drobnosti typu škrabka na brambory. Tipuju, že už jsme oficiálně vedeni jako „ti nároční“.</p><p>Odpoledne jsme vyrazili znovu na pláž. Koupání, zahrabávání do písku, stavba hradů. Po návratu rychlá večeře a ještě jeden výpad ven. Na skateparku Tomík oznámil, že jsem tlustý a potřebuju trénink. Vzal to vážně a udělal mi rychlokurz běhu. Je to natočené a myslím, že z toho bude virální video.</p><p>Večer klasika: děti umýt a uložit, já se pustil do článku na LinkedIn, aby se nám nezastavil tamní flow. Do postele jsem se dostal až k ránu. Den? Plný slunce, plný drobných absurdit a hlavně — přesně ten typ dovolené, který se nezapomíná.</p>
+    </section>
+
+    <section class="gal" aria-label="Fotky">
+      <p class="label">Fotky · 23</p>
+      <script type="application/json" class="gal-data">[
+[
+"den02/fotky/IMG_6671.jpg",
+"08:36 · Východ slunce na pláži",
+"východ slunce na pláži"
+],
+[
+"den02/fotky/IMG_6672.jpg",
+"08:39 · Pláž ráno",
+"pláž ráno"
+],
+[
+"den02/fotky/IMG_6678.jpg",
+"08:40 · Kluk u moře při východu slunce",
+"kluk u moře při východu slunce"
+],
+[
+"den02/fotky/IMG_6681.jpg",
+"08:40",
+"Fotka z středa 13. srpna"
+],
+[
+"den02/fotky/IMG_6682.jpg",
+"08:52 · Kopání v písku",
+"kopání v písku"
+],
+[
+"den02/fotky/IMG_6683.jpg",
+"08:52 · Kopání v písku",
+"kopání v písku"
+],
+[
+"den02/fotky/IMG_6687.jpg",
+"08:52",
+"Fotka z středa 13. srpna"
+],
+[
+"den02/fotky/IMG_6689.jpg",
+"09:52",
+"Fotka z středa 13. srpna"
+],
+[
+"den02/fotky/IMG_6690.jpg",
+"09:52",
+"Fotka z středa 13. srpna"
+],
+[
+"den02/fotky/IMG_6691.jpg",
+"09:52",
+"Fotka z středa 13. srpna"
+],
+[
+"den02/fotky/IMG_6693.jpg",
+"09:52 · Promenáda",
+"promenáda"
+],
+[
+"den02/fotky/IMG_6696.jpg",
+"10:12",
+"Fotka z středa 13. srpna"
+],
+[
+"den02/fotky/IMG_6697.jpg",
+"10:12 · Houpačka",
+"houpačka"
+],
+[
+"den02/fotky/IMG_6698.jpg",
+"10:54",
+"Fotka z středa 13. srpna"
+],
+[
+"den02/fotky/IMG_6699.jpg",
+"11:07",
+"Fotka z středa 13. srpna"
+],
+[
+"den02/fotky/IMG_6700.jpg",
+"11:07 · Kaktus",
+"kaktus"
+],
+[
+"den02/fotky/IMG_6716.jpg",
+"16:51",
+"Fotka z středa 13. srpna"
+],
+[
+"den02/fotky/IMG_6718.jpg",
+"16:51 · Pískový hrad",
+"pískový hrad"
+],
+[
+"den02/fotky/IMG_6719.jpg",
+"20:46",
+"Fotka z středa 13. srpna"
+],
+[
+"den02/fotky/IMG_6721.jpg",
+"21:47 · Večerní náměstí",
+"večerní náměstí"
+],
+[
+"den02/fotky/IMG_6725.jpg",
+"22:02 · Svítící hračky v noci",
+"svítící hračky v noci"
+],
+[
+"den02/fotky/IMG_6728.jpg",
+"22:03 · Svítící hračky v noci",
+"svítící hračky v noci"
+],
+[
+"den02/fotky/IMG_6730.jpg",
+"22:27",
+"Fotka z středa 13. srpna"
+]
+]</script>
+    </section>
+
+  </article>
+  <article class="entry" id="den03" data-short="Čt 14. 8." data-title="Rancho Texas" hidden>
+    <div class="entry-head col">
+      <span class="date">Čtvrtek 14. srpna</span>
+      <h2>Rancho Texas</h2>
+    </div>
+
+    <section class="film" aria-label="Video" data-youtube="https://youtu.be/0Cf6hmFFqWU" data-src="" data-poster="den03/video/nahled.jpg" data-title="Lanzarote – Rancho Texas">
+      <div class="film-frame"></div>
+      <p class="film-cap">Vlog · Čt 14. 8. · 11:19</p>
+    </section>
+
+    <p class="lead col">Táta myslel, že jedeme do zoo, a ono to byl i aquapark – takže hned první zásek a cesta zpátky pro plavky. Leguáni, dravci, lachtani a delfíni, tobogány a slaný bazén. Večer na balkoně hlasování o nejlepší zvíře: varan.</p>
+
+    <section class="mapa col" aria-label="Nákres dne">
+      <p class="label">Kam jsme se vydali</p>
+      <svg class="nakres" viewBox="0 0 591 637" role="img" aria-label="Nákres ostrova: letiště, náš dům přibližně a kam jsme se vydali – Rancho Texas"><rect class="sk-more" width="591" height="637" rx="10"/><path class="sk-ostrov" d="M61.9,525.1 L68.9,534.8 L66.6,550.0 L71.3,560.4 L90.3,552.2 L97.8,553.5 L104.5,559.8 L108.3,556.6 L109.2,559.6 L113.0,557.1 L110.2,558.6 L112.3,555.2 L109.4,555.4 L115.4,551.4 L126.8,553.8 L127.9,555.3 L125.9,556.5 L126.6,557.6 L129.5,555.6 L131.5,559.0 L124.9,557.3 L133.3,560.7 L142.6,555.8 L153.0,565.1 L157.5,579.3 L170.5,568.4 L173.1,558.3 L184.6,545.6 L195.9,537.8 L195.0,529.7 L201.5,510.6 L209.0,500.7 L217.1,501.5 L234.2,490.6 L254.5,485.5 L301.7,486.3 L312.6,476.6 L318.3,477.6 L335.9,469.1 L338.8,461.6 L348.7,452.5 L371.0,445.1 L380.0,445.8 L387.1,441.5 L404.4,441.2 L406.4,439.6 L408.1,436.3 L411.0,437.8 L408.2,436.0 L412.4,430.2 L408.2,432.7 L405.8,439.6 L403.4,437.0 L416.3,424.0 L415.7,431.2 L419.8,426.3 L415.6,438.6 L422.5,419.9 L426.0,422.7 L430.4,414.9 L434.8,414.9 L437.8,409.4 L450.8,401.5 L460.1,402.0 L457.7,395.6 L466.5,392.1 L470.1,386.8 L470.0,377.5 L477.5,376.2 L481.7,371.4 L482.8,365.4 L477.2,354.4 L482.9,341.2 L479.8,330.1 L485.2,325.9 L499.0,288.5 L497.7,277.6 L490.6,273.8 L491.3,269.8 L482.4,260.8 L481.7,246.5 L496.6,227.9 L499.7,228.5 L500.1,224.3 L518.6,214.6 L519.4,205.1 L522.3,202.8 L519.0,199.5 L526.5,181.6 L527.1,161.5 L522.4,157.1 L523.0,153.7 L513.6,152.5 L508.5,143.7 L500.7,142.7 L500.8,139.8 L497.6,139.7 L498.2,137.5 L496.4,137.5 L497.0,137.2 L496.9,135.0 L496.1,133.9 L494.0,132.7 L496.6,135.2 L495.2,138.5 L491.8,133.5 L480.4,132.9 L476.0,116.3 L468.7,130.8 L449.1,142.6 L448.6,155.1 L444.1,155.6 L439.8,162.0 L432.6,188.5 L423.9,199.5 L423.0,212.0 L425.2,213.9 L421.8,230.5 L400.8,255.8 L386.5,260.6 L361.7,239.9 L348.8,236.6 L342.0,236.9 L333.7,245.6 L323.7,247.2 L312.4,260.3 L306.0,258.9 L303.4,250.4 L292.7,254.1 L287.1,251.2 L282.8,257.3 L288.6,263.8 L283.3,263.5 L263.9,274.2 L264.3,280.2 L256.8,287.6 L243.3,289.7 L237.8,301.7 L221.8,295.4 L217.7,300.0 L192.8,302.6 L186.9,306.3 L182.0,317.7 L177.4,320.1 L175.4,317.0 L172.5,321.7 L165.6,322.1 L161.2,328.6 L151.1,333.7 L145.1,345.1 L127.9,356.4 L127.3,363.0 L114.6,385.1 L114.3,397.3 L110.4,405.6 L115.8,420.3 L109.6,428.3 L114.0,439.5 L110.3,445.1 L112.1,457.1 L109.9,462.0 L115.5,473.5 L104.3,488.0 L96.6,490.8 L92.4,500.1 L87.2,503.4 L86.2,511.5 L70.8,515.4 L61.9,525.1 Z"/><path class="sk-ostrov" d="M397.1,133.6 L401.4,141.8 L408.6,139.3 L412.1,144.4 L415.1,140.2 L423.6,141.3 L431.1,133.3 L441.0,134.2 L444.0,132.2 L441.4,132.4 L442.5,128.5 L444.7,132.9 L445.9,125.0 L456.8,112.3 L459.3,98.8 L473.4,90.2 L472.9,82.3 L464.0,72.8 L451.6,72.9 L439.1,59.5 L434.9,59.2 L430.8,64.9 L429.9,76.7 L424.7,82.2 L425.6,96.2 L417.4,103.9 L420.0,114.9 L400.0,126.1 L397.1,133.6 Z"/><text class="sk-ostrov-jm" x="441.2" y="66.2" text-anchor="middle">La Graciosa</text><text class="sk-ostrov-jm" x="245.2" y="313.0">LANZAROTE</text><g class="sk-meritko"><path d="M20,615 h103"/><text x="71.5" y="607" text-anchor="middle">10 km</text></g><g class="sk-sever"><path d="M561,619 l0,-34 m-7,10 l7,-10 l7,10"/><text x="561" y="635" text-anchor="middle">S</text></g><path class="sk-cesta" d="M348.7,452.1 Q321.1,453.2 300.5,471.7"/><path class="sk-cesta" d="M300.5,471.7 Q328.1,470.6 348.7,452.1"/><circle class="sk-letiste" cx="336.6" cy="449.8" r="11"/><text class="sk-znak" x="336.6" y="454.3" text-anchor="middle">✈&#xFE0E;</text><circle class="sk-dum-okoli" cx="348.7" cy="452.1" r="17"/><path class="sk-dum" d="M340.7,459.1 v-8 l8,-7 l8,7 v8 Z"/><circle class="sk-vylet" cx="300.5" cy="471.7" r="12"/><text class="sk-cislo" x="300.5" y="476.2" text-anchor="middle">1</text><text class="sk-popis" x="324.6" y="437.8" text-anchor="end">letiště</text><text class="sk-popis" x="356.7" y="478.1" text-anchor="start">náš dům (přibližně)</text><text class="sk-popis" x="286.5" y="477.7" text-anchor="end">Rancho Texas</text></svg>
+      <ol class="mapa-seznam"><li class="m-bydlení"><i>⌂</i><div><b>Playa Honda – tady jsme bydleli (přibližně)</b><span>10:28–11:30</span></div></li><li class="m-výlet"><i>1</i><div><b>Rancho Texas Park</b><span>12:02–18:15</span><q>Realita: zoo a aquapark. A já — bez plavek, ručníků, brýlí</q></div></li><li class="m-bydlení"><i>⌂</i><div><b>Playa Honda – tady jsme bydleli (přibližně)</b><span>21:44–22:28</span></div></li></ol>
+    </section>
+
+
+    <section class="blog col" aria-label="Zápis z blogu">
+      <p class="label">Tátův zápis z blogu</p>
+      <h3>Ranč, delfíni a aquaparková trofej</h3>
+      <p>Některé dny začínají tak, že si myslíte, že přesně víte, co vás čeká. A jiné začínají tak, že stojíte před branou a zjišťujete, že vaše představa má trhliny větší než tobogánová roura v aquaparku.</p><p>Rancho Texas. V mém itineráři: zoo. Zvířata, výběhy, možná nanuk, pár fotek leguánů a domů.</p><p>Realita: zoo a aquapark. A já — bez plavek, ručníků, brýlí, prostě bez čehokoliv, co by se hodilo do části s vodou.</p><p>Rodina mě pozoruje s výrazem, který říká „tak co, průvodče?“. Mám dvě možnosti: hrát, že to tak bylo v plánu, nebo přiznat, že jsem to netrefil. Vybral jsem třetí: rychlou otočku domů pro věci a návrat, než si všimnou, že tam chybím.</p><p>Když jsem se vrátil, čekali mě u leguánů. Jejich výraz „no konečně“ mi připomněl, že na některé věci prostě nesmíte nechat lidi čekat – ať už jde o dobrou historku, nebo o oblíbený výběh v zoo. Leguáni vypadali spokojeně, slunce se odráželo od jejich šupin, a já měl na chvíli pocit, že tohle je vlastně celý smysl dovolené – stát, koukat a nechat to na sebe působit.</p><p>Prošli jsme zoo křížem krážem. U kohouta bydlícího mezi plameňáky jsem se zastavil déle než ostatní. Přemýšlel jsem, jestli spolu vůbec mluví, nebo si jen vybrali tu nejpodivnější spolubydlící zkušenost, co mohla přijít. Nikomu to nevadilo – jim, plameňákům, ani návštěvníkům.</p><p>První plánovaný program: show papoušků. Máťa šel s očekáváním, Tomík se tvářil, že je to ztráta času. Po deseti minutách jsme se shodli, že má pravdu. Papoušci létali z jedné strany na druhou, ale jinak nic, co by stálo za potlesk. Odejít dřív se ukázalo jako správná volba – za pár minut začínalo vystoupení dravců.</p><p>A to je jiná liga. Sokolové létající pár centimetrů nad hlavami, káně střemhlav k cíli, orli s rozpětím křídel, co vás na chvíli přesvědčí, že jste na scéně z dokumentu BBC. Dravci jsou zvláštní – v kleci působí jako nudní sousedi z vedlejšího paneláku, ale jakmile dostanou prostor, stanou se hvězdami večera.</p><p>A pak přišli delfíni. Elegantní, hraví, s úsměvem, který by zvládnul i politickou kampaň. Skákali, dělali salta, vezli trenérku na čumáku. Napadlo mě, jestli náhodou netrénují pro Uber, jen jim chybí registrační číslo na ploutvi.</p><p>Ještě jsme stihli interaktivní expozici o vzniku ostrova – digitální sopečné erupce, lávové proudy, podmořské výbuchy. Krásné, ale venku už teplota stoupala. A tady přišla ta myšlenka: dovolená není jen o tom vidět všechno, ale taky vědět, kdy přestat.</p><p>Rozhodnutí padlo rychle – aquapark. Brouzdaliště pro mimina, vodní hrady pro děti, skluzavky pro odvážné. Na velké skluzavky pustili jen ty, co mají nad 120 cm, takže si každý odnesl jiný zážitek. Kluci šli s mámou na odpočinek, já si ukradl chvilku pro sebe a sjel pár tobogánů. Čistá radost.</p><p>A pak to přišlo – aquaparková trofej. Máťa si domů odnesl pouzdro na Xbox, které našel a okamžitě překřtil na svačinovou tašku do školy. Na obalu stálo „Oliver“, ale černá fixa to vyřeší. Možná je každý suvenýr jen otázkou správného načasování. Možná dovolená funguje stejně.</p><p>Večer rychlá večeře – místní řízky a masové koule, chutnající líp než doma. Krátká zastávka na hřišti. A pak domů.</p><p>A já si říkal: Možná nejlepší dny nejsou ty, které naplánujete do posledního detailu… ale ty, u kterých necháte prostor, aby vás překvapily.</p>
+    </section>
+
+    <section class="gal" aria-label="Fotky">
+      <p class="label">Fotky · 74</p>
+      <script type="application/json" class="gal-data">[
+[
+"den03/fotky/IMG_6732.jpg",
+"11:08",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6733.jpg",
+"11:21",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6734.jpg",
+"11:22",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6736.jpg",
+"12:02",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6738.jpg",
+"12:04",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6741.jpg",
+"12:59",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6742.jpg",
+"13:01 · Tomík u jezírka",
+"Tomík u jezírka"
+],
+[
+"den03/fotky/IMG_6744.jpg",
+"13:03",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6745.jpg",
+"13:11 · Rodinné selfie",
+"rodinné selfie"
+],
+[
+"den03/fotky/IMG_6747.jpg",
+"13:17",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6748.jpg",
+"13:17 · Plameňáci",
+"plameňáci"
+],
+[
+"den03/fotky/IMG_6749.jpg",
+"13:20",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6750.jpg",
+"13:35",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6752.jpg",
+"13:36",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6753.jpg",
+"13:36",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6756.jpg",
+"13:38",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6758.jpg",
+"13:40 · Kluci na show",
+"kluci na show"
+],
+[
+"den03/fotky/IMG_6760.jpg",
+"13:40",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6762.jpg",
+"13:41",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6763.jpg",
+"13:41",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6765.jpg",
+"13:43",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6766.jpg",
+"13:46",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6768.jpg",
+"13:46",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6769.jpg",
+"13:46 · Kakadu",
+"kakadu"
+],
+[
+"den03/fotky/IMG_6771.jpg",
+"13:47",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6773.jpg",
+"13:50",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6775.jpg",
+"13:52",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6777.jpg",
+"13:52 · Papoušek",
+"papoušek"
+],
+[
+"den03/fotky/IMG_6778.jpg",
+"14:01",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6779.jpg",
+"14:01",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6781.jpg",
+"14:04",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6783.jpg",
+"14:04",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6786.jpg",
+"14:14",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6791.jpg",
+"14:24 · Orel",
+"orel"
+],
+[
+"den03/fotky/IMG_6794.jpg",
+"14:28",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6797.jpg",
+"14:29 · Cesta parkem",
+"cesta parkem"
+],
+[
+"den03/fotky/IMG_6798.jpg",
+"14:30",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6799.jpg",
+"14:30",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6801.jpg",
+"14:34",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6802.jpg",
+"14:38",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6803.jpg",
+"14:38 · Kluci v parku",
+"kluci v parku"
+],
+[
+"den03/fotky/IMG_6805.jpg",
+"14:42 · Rodina na tribuně",
+"rodina na tribuně"
+],
+[
+"den03/fotky/IMG_6807.jpg",
+"14:47",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6811.jpg",
+"14:50",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6813.jpg",
+"14:53 · Šárka a Tomík",
+"Šárka a Tomík"
+],
+[
+"den03/fotky/IMG_6817.jpg",
+"14:57",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6822.jpg",
+"15:11",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6823.jpg",
+"15:11 · Pod vodou",
+"pod vodou"
+],
+[
+"den03/fotky/IMG_6825.jpg",
+"15:11",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6826.jpg",
+"15:13",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6828.jpg",
+"15:25 · Žraloci v tunelu",
+"žraloci v tunelu"
+],
+[
+"den03/fotky/IMG_6830.jpg",
+"15:25",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6832.jpg",
+"15:27 · Kluci v jeskyni",
+"kluci v jeskyni"
+],
+[
+"den03/fotky/IMG_6833.jpg",
+"15:31",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6834.jpg",
+"15:32",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6839.jpg",
+"15:48",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6841.jpg",
+"15:49",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6842.jpg",
+"15:49",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6843.jpg",
+"15:49 · Ibis",
+"ibis"
+],
+[
+"den03/fotky/IMG_6845.jpg",
+"15:52",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6846.jpg",
+"15:55",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6848.jpg",
+"15:56 · Leguán",
+"leguán"
+],
+[
+"den03/fotky/IMG_6852.jpg",
+"16:01",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6853.jpg",
+"16:01 · Želva",
+"želva"
+],
+[
+"den03/fotky/IMG_6854.jpg",
+"16:02",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6855.jpg",
+"16:03",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6856.jpg",
+"16:03",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6857.jpg",
+"16:25 · Bazén",
+"bazén"
+],
+[
+"den03/fotky/IMG_6867.jpg",
+"17:37 · Táta a Tomík v bazénu",
+"táta a Tomík v bazénu"
+],
+[
+"den03/fotky/IMG_6873.jpg",
+"21:49",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6877.jpg",
+"22:22 · Večer venku",
+"večer venku"
+],
+[
+"den03/fotky/IMG_6878.jpg",
+"22:24",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6879.jpg",
+"22:27",
+"Fotka z čtvrtek 14. srpna"
+],
+[
+"den03/fotky/IMG_6880.jpg",
+"22:28 · Běhání se svítícími hračkami",
+"běhání se svítícími hračkami"
+]
+]</script>
+    </section>
+
+  </article>
+  <article class="entry" id="den04" data-short="Pá 15. 8." data-title="El Golfo, Hervideros, Arrecife" hidden>
+    <div class="entry-head col">
+      <span class="date">Pátek 15. srpna</span>
+      <h2>El Golfo, Hervideros, Arrecife</h2>
+    </div>
+
+    <section class="film" aria-label="Video" data-youtube="https://youtu.be/K3oCIYHxWLk" data-src="" data-poster="den04/video/nahled.jpg" data-title="Lanzarote – El Golfo, Hervideros, Arrecife">
+      <div class="film-frame"></div>
+      <p class="film-cap">Vlog · Pá 15. 8. · 3:43</p>
+    </section>
+
+    <p class="lead col">Vítr, černé pláže a zelená laguna u El Golfo, lávové brány v Los Hervideros. Večer hlavní město Arrecife, svátek, všude světla, tanečníci – a všichni vyřízení z vedra.</p>
+
+    <section class="mapa col" aria-label="Nákres dne">
+      <p class="label">Kam jsme se vydali</p>
+      <svg class="nakres" viewBox="0 0 591 637" role="img" aria-label="Nákres ostrova: letiště, náš dům přibližně a kam jsme se vydali – El Golfo, Los Hervideros, Arrecife"><rect class="sk-more" width="591" height="637" rx="10"/><path class="sk-ostrov" d="M61.9,525.1 L68.9,534.8 L66.6,550.0 L71.3,560.4 L90.3,552.2 L97.8,553.5 L104.5,559.8 L108.3,556.6 L109.2,559.6 L113.0,557.1 L110.2,558.6 L112.3,555.2 L109.4,555.4 L115.4,551.4 L126.8,553.8 L127.9,555.3 L125.9,556.5 L126.6,557.6 L129.5,555.6 L131.5,559.0 L124.9,557.3 L133.3,560.7 L142.6,555.8 L153.0,565.1 L157.5,579.3 L170.5,568.4 L173.1,558.3 L184.6,545.6 L195.9,537.8 L195.0,529.7 L201.5,510.6 L209.0,500.7 L217.1,501.5 L234.2,490.6 L254.5,485.5 L301.7,486.3 L312.6,476.6 L318.3,477.6 L335.9,469.1 L338.8,461.6 L348.7,452.5 L371.0,445.1 L380.0,445.8 L387.1,441.5 L404.4,441.2 L406.4,439.6 L408.1,436.3 L411.0,437.8 L408.2,436.0 L412.4,430.2 L408.2,432.7 L405.8,439.6 L403.4,437.0 L416.3,424.0 L415.7,431.2 L419.8,426.3 L415.6,438.6 L422.5,419.9 L426.0,422.7 L430.4,414.9 L434.8,414.9 L437.8,409.4 L450.8,401.5 L460.1,402.0 L457.7,395.6 L466.5,392.1 L470.1,386.8 L470.0,377.5 L477.5,376.2 L481.7,371.4 L482.8,365.4 L477.2,354.4 L482.9,341.2 L479.8,330.1 L485.2,325.9 L499.0,288.5 L497.7,277.6 L490.6,273.8 L491.3,269.8 L482.4,260.8 L481.7,246.5 L496.6,227.9 L499.7,228.5 L500.1,224.3 L518.6,214.6 L519.4,205.1 L522.3,202.8 L519.0,199.5 L526.5,181.6 L527.1,161.5 L522.4,157.1 L523.0,153.7 L513.6,152.5 L508.5,143.7 L500.7,142.7 L500.8,139.8 L497.6,139.7 L498.2,137.5 L496.4,137.5 L497.0,137.2 L496.9,135.0 L496.1,133.9 L494.0,132.7 L496.6,135.2 L495.2,138.5 L491.8,133.5 L480.4,132.9 L476.0,116.3 L468.7,130.8 L449.1,142.6 L448.6,155.1 L444.1,155.6 L439.8,162.0 L432.6,188.5 L423.9,199.5 L423.0,212.0 L425.2,213.9 L421.8,230.5 L400.8,255.8 L386.5,260.6 L361.7,239.9 L348.8,236.6 L342.0,236.9 L333.7,245.6 L323.7,247.2 L312.4,260.3 L306.0,258.9 L303.4,250.4 L292.7,254.1 L287.1,251.2 L282.8,257.3 L288.6,263.8 L283.3,263.5 L263.9,274.2 L264.3,280.2 L256.8,287.6 L243.3,289.7 L237.8,301.7 L221.8,295.4 L217.7,300.0 L192.8,302.6 L186.9,306.3 L182.0,317.7 L177.4,320.1 L175.4,317.0 L172.5,321.7 L165.6,322.1 L161.2,328.6 L151.1,333.7 L145.1,345.1 L127.9,356.4 L127.3,363.0 L114.6,385.1 L114.3,397.3 L110.4,405.6 L115.8,420.3 L109.6,428.3 L114.0,439.5 L110.3,445.1 L112.1,457.1 L109.9,462.0 L115.5,473.5 L104.3,488.0 L96.6,490.8 L92.4,500.1 L87.2,503.4 L86.2,511.5 L70.8,515.4 L61.9,525.1 Z"/><path class="sk-ostrov" d="M397.1,133.6 L401.4,141.8 L408.6,139.3 L412.1,144.4 L415.1,140.2 L423.6,141.3 L431.1,133.3 L441.0,134.2 L444.0,132.2 L441.4,132.4 L442.5,128.5 L444.7,132.9 L445.9,125.0 L456.8,112.3 L459.3,98.8 L473.4,90.2 L472.9,82.3 L464.0,72.8 L451.6,72.9 L439.1,59.5 L434.9,59.2 L430.8,64.9 L429.9,76.7 L424.7,82.2 L425.6,96.2 L417.4,103.9 L420.0,114.9 L400.0,126.1 L397.1,133.6 Z"/><text class="sk-ostrov-jm" x="441.2" y="66.2" text-anchor="middle">La Graciosa</text><text class="sk-ostrov-jm" x="245.2" y="313.0">LANZAROTE</text><g class="sk-meritko"><path d="M20,615 h103"/><text x="71.5" y="607" text-anchor="middle">10 km</text></g><g class="sk-sever"><path d="M561,619 l0,-34 m-7,10 l7,-10 l7,10"/><text x="561" y="635" text-anchor="middle">S</text></g><path class="sk-cesta" d="M348.7,452.1 Q238.3,392.9 115.5,417.6"/><path class="sk-cesta" d="M115.5,417.6 Q108.3,431.3 111.5,446.4"/><path class="sk-cesta" d="M111.5,446.4 Q256.7,494.1 399.0,438.3"/><path class="sk-cesta" d="M399.0,438.3 Q371.4,436.1 348.7,452.1"/><circle class="sk-letiste" cx="336.6" cy="449.8" r="11"/><text class="sk-znak" x="336.6" y="454.3" text-anchor="middle">✈&#xFE0E;</text><circle class="sk-dum-okoli" cx="348.7" cy="452.1" r="17"/><path class="sk-dum" d="M340.7,459.1 v-8 l8,-7 l8,7 v8 Z"/><circle class="sk-vylet" cx="115.5" cy="417.6" r="12"/><text class="sk-cislo" x="115.5" y="422.1" text-anchor="middle">1</text><circle class="sk-vylet" cx="111.5" cy="446.4" r="12"/><text class="sk-cislo" x="111.5" y="450.9" text-anchor="middle">2</text><circle class="sk-vylet" cx="399.0" cy="438.3" r="12"/><text class="sk-cislo" x="399.0" y="442.8" text-anchor="middle">3</text><text class="sk-popis" x="324.6" y="437.8" text-anchor="end">letiště</text><text class="sk-popis" x="356.7" y="478.1" text-anchor="start">náš dům (přibližně)</text><text class="sk-popis" x="129.5" y="413.6" text-anchor="start">El Golfo</text><text class="sk-popis" x="125.5" y="458.4" text-anchor="start">Los Hervideros</text><text class="sk-popis" x="413.0" y="443.3" text-anchor="start">Arrecife</text></svg>
+      <ol class="mapa-seznam"><li class="m-výlet"><i>1</i><div><b>El Golfo a zelená laguna</b><span>13:15–14:50</span><q>výlet, co měl být „podívej a jdi dál“, změnil v tříhodinovou expedici za krabíky a medúzami</q></div></li><li class="m-výlet"><i>2</i><div><b>Los Hervideros</b><span>15:36–16:39</span><q>Místo, kde se Atlantik rozhodl, že nebude šeptat, ale řvát.</q></div></li><li class="m-výlet"><i>3</i><div><b>Arrecife</b><span>22:12–23:21</span><q>Náhodou byl svátek. Město plné stánků, hudby, lidí.</q></div></li></ol>
+    </section>
+
+
+    <section class="blog col" aria-label="Zápis z blogu">
+      <p class="label">Tátův zápis z blogu</p>
+      <h3>Zelené jezero, krabíci a unavený průvodce</h3>
+      <p>Plán byl jasný: vyrazíme v devět. Realita? V jedenáct. A já si říkal – není to tak hrozné, vždyť všechno je tady do padesáti kilometrů. Jenže každá minuta z rána se večer promění v únavu. A já to vím. Ale stejně to dělám.</p><p>El Golfo, zelené jezero. Zaparkovali jsme auto a po dvou stech metrech na vyhlídku. Jenže my jsme rodina, která neumí zůstat u vyhlídky. A tak se výlet, co měl být „podívej a jdi dál“, změnil v tříhodinovou expedici za krabíky a medúzami.</p><p>Děti mají zvláštní schopnost najít život tam, kde už dávno žádný není. Objevili mrtvého kraba – atrakce číslo jedna. Musel se prozkoumat, očistit, uložit do krabičky… a rozpadl se ještě dřív, než jsme došli k autu. Slzy. Jediný lék? Najít živého.</p><p>A protože živí krabi nežijí tam, kde je to bezpečné, museli jsme dál. V sandálech, po kluzkých kamenech, za hranici rodičovského komfortu. Tam jsme potkali rumunského tátu z Anglie s dítětem, které taky chtělo kraby. Najednou nás bylo víc. Dva tátové, tři děti, jedna mise. Krabi.</p><p>Nakonec jsme našli celou rodinu pod kamenem. Tomík strkal ruce tak hluboko, že jsem měl pocit, že se naučí krabí jazyk. Vytáhl jsem ho dřív, než ho něco cvaklo. Všichni spokojení. Já hlavně proto, že jsme přežili.</p><p>Na pláži přišla svačina. Řízek v písku. Doslova. Tomík ho upustil, otřepal, snědl. „Křupavější verze,“ hlásil. A já si říkal, jestli není život vlastně jen o tom, jak moc písku jste ochotní spolknout.</p><p>Pak jsme šli k jezeru. Zelené, krásné, lidmi obklopené. Každý chtěl selfie. My taky. Protože tak to je. Když se ocitnete u zeleného jezera, musíte mít důkaz, že jste tam byli. Bez fotky to prý neplatí.</p><p>Cestou jsme objevili něco, co v itineráři nebylo – Los Hervideros. Místo, kde se Atlantik rozhodl, že nebude šeptat, ale řvát. Voda se tříští o černé lávové skály a mizí v průrvách, aby se o pár vteřin později vynořila s rachotem, jako kdyby chtěla připomenout, kdo je tady pánem. Chodníčky vedou přímo nad těmi rozbouřenými otvory a člověk má pocit, že stojí na hraně pračky nastavené na nejvyšší otáčky. Je to divoké, hlučné a nebezpečně krásné – přesně ten typ místa, kde si řeknete, že fotka nikdy nevystihne, jak to doopravdy vypadá.</p><p>Tomík, tradičně poslední, si tam ještě rozšířil svoji specializaci – zkoumat všechno, co se dá. Živočichy, kanály, kameny. Někdy mám pocit, že jeho tempo je trestem pro rodiče. A jindy přemýšlím, jestli to není spíš dar – schopnost zastavit se, koukat a nehledět na to, že ostatní už šli.</p><p>Večer jsme se vrátili domů unavení, ale ne dost, abychom zůstali. Náhodou byl svátek. Město plné stánků, hudby, lidí. Opice na gumě, plastové meče, tanec v rytmu salsy. Atmosféra, která vás pohltí, a přitom víte, že nejhezčí je to právě proto, že jste do toho vkročili náhodou.</p><p>Jenže Tomíkovi došla energie. A když dojde šestiletému dítěti energie, dojde i vám. Takže na zádech syn, na zádech batoh s vodou a jídlem – a já, improvizovaný šerpa, mířím zpátky k autu.</p><p>Doma se děti položily do postele a během minuty spaly. Máma taky. A já? Já jsem si ještě otevřel notebook a začal psát tenhle zápis – protože jinak bych za pár dní zapomněl, jak chutná řízek s pískem a jak hlasitě mluví oceán v Los Hervideros.</p>
+    </section>
+
+    <section class="gal" aria-label="Fotky">
+      <p class="label">Fotky · 32</p>
+      <script type="application/json" class="gal-data">[
+[
+"den04/fotky/IMG_6889.jpg",
+"13:26 · Cesta podél moře",
+"cesta podél moře"
+],
+[
+"den04/fotky/IMG_6886.jpg",
+"13:25",
+"Fotka z pátek 15. srpna"
+],
+[
+"den04/fotky/IMG_6888.jpg",
+"13:26",
+"Fotka z pátek 15. srpna"
+],
+[
+"den04/fotky/IMG_6890.jpg",
+"13:35 · Máťa na skalách",
+"Máťa na skalách"
+],
+[
+"den04/fotky/IMG_6891.jpg",
+"13:38",
+"Fotka z pátek 15. srpna"
+],
+[
+"den04/fotky/IMG_6893.jpg",
+"14:02 · Šárka a Tomík",
+"Šárka a Tomík"
+],
+[
+"den04/fotky/IMG_6895.jpg",
+"14:04",
+"Fotka z pátek 15. srpna"
+],
+[
+"den04/fotky/IMG_6897.jpg",
+"14:41",
+"Fotka z pátek 15. srpna"
+],
+[
+"den04/fotky/IMG_6898.jpg",
+"14:42",
+"Fotka z pátek 15. srpna"
+],
+[
+"den04/fotky/IMG_6899.jpg",
+"14:45 · Zelená laguna",
+"zelená laguna"
+],
+[
+"den04/fotky/IMG_6900.jpg",
+"14:45",
+"Fotka z pátek 15. srpna"
+],
+[
+"den04/fotky/IMG_6901.jpg",
+"14:45",
+"Fotka z pátek 15. srpna"
+],
+[
+"den04/fotky/IMG_6903.jpg",
+"14:47 · Rodina u zelené laguny",
+"rodina u zelené laguny"
+],
+[
+"den04/fotky/IMG_6906.jpg",
+"14:47",
+"Fotka z pátek 15. srpna"
+],
+[
+"den04/fotky/IMG_6908.jpg",
+"14:50",
+"Fotka z pátek 15. srpna"
+],
+[
+"den04/fotky/IMG_6910.jpg",
+"15:36 · Tomík sbírá kameny",
+"Tomík sbírá kameny"
+],
+[
+"den04/fotky/IMG_6914.jpg",
+"15:37",
+"Fotka z pátek 15. srpna"
+],
+[
+"den04/fotky/IMG_6917.jpg",
+"15:51 · Máťa u moře",
+"Máťa u moře"
+],
+[
+"den04/fotky/IMG_6919.jpg",
+"15:56",
+"Fotka z pátek 15. srpna"
+],
+[
+"den04/fotky/IMG_6922.jpg",
+"15:59",
+"Fotka z pátek 15. srpna"
+],
+[
+"den04/fotky/IMG_6923.jpg",
+"15:59",
+"Fotka z pátek 15. srpna"
+],
+[
+"den04/fotky/IMG_6924.jpg",
+"16:17 · Lávové jeskyně u moře",
+"lávové jeskyně u moře"
+],
+[
+"den04/fotky/IMG_6925.jpg",
+"16:26 · Šárka nad jeskyní",
+"Šárka nad jeskyní"
+],
+[
+"den04/fotky/IMG_6928.jpg",
+"16:30 · Kluci v lávové bráně",
+"kluci v lávové bráně"
+],
+[
+"den04/fotky/IMG_6931.jpg",
+"16:36",
+"Fotka z pátek 15. srpna"
+],
+[
+"den04/fotky/IMG_6934.jpg",
+"22:12",
+"Fotka z pátek 15. srpna"
+],
+[
+"den04/fotky/IMG_6935.jpg",
+"22:13",
+"Fotka z pátek 15. srpna"
+],
+[
+"den04/fotky/IMG_6936.jpg",
+"22:13",
+"Fotka z pátek 15. srpna"
+],
+[
+"den04/fotky/IMG_6938.jpg",
+"22:18",
+"Fotka z pátek 15. srpna"
+],
+[
+"den04/fotky/IMG_6939.jpg",
+"22:19",
+"Fotka z pátek 15. srpna"
+],
+[
+"den04/fotky/IMG_6944.jpg",
+"23:18 · Slavnost",
+"slavnost"
+],
+[
+"den04/fotky/IMG_6945.jpg",
+"23:18",
+"Fotka z pátek 15. srpna"
+]
+]</script>
+    </section>
+
+  </article>
+  <article class="entry" id="den05" data-short="So 16. 8." data-title="Volské oko, pláž a pevnost" hidden>
+    <div class="entry-head col">
+      <span class="date">Sobota 16. srpna</span>
+      <h2>Volské oko, pláž a pevnost</h2>
+    </div>
+
+    <section class="film" aria-label="Video" data-youtube="https://youtu.be/eVbHWtP9Gfw" data-src="" data-poster="den05/video/nahled.jpg" data-title="Lanzarote – Volské oko, pláž a pevnost">
+      <div class="film-frame"></div>
+      <p class="film-cap">Vlog · So 16. 8. · 9:02</p>
+    </section>
+
+    <p class="lead col">Historická chvíle: Tomík poprvé jí volské oko. Delfinárium nevyšlo, tak jsme den strávili bez plánu na pláži a v restauraci s masem, které jsme nedojedli. Večer pevnost San Gabriel a noční Arrecife.</p>
+
+    <section class="mapa col" aria-label="Nákres dne">
+      <p class="label">Kam jsme se vydali</p>
+      <svg class="nakres" viewBox="0 0 591 637" role="img" aria-label="Nákres ostrova: letiště, náš dům přibližně a kam jsme se vydali – Arrecife"><rect class="sk-more" width="591" height="637" rx="10"/><path class="sk-ostrov" d="M61.9,525.1 L68.9,534.8 L66.6,550.0 L71.3,560.4 L90.3,552.2 L97.8,553.5 L104.5,559.8 L108.3,556.6 L109.2,559.6 L113.0,557.1 L110.2,558.6 L112.3,555.2 L109.4,555.4 L115.4,551.4 L126.8,553.8 L127.9,555.3 L125.9,556.5 L126.6,557.6 L129.5,555.6 L131.5,559.0 L124.9,557.3 L133.3,560.7 L142.6,555.8 L153.0,565.1 L157.5,579.3 L170.5,568.4 L173.1,558.3 L184.6,545.6 L195.9,537.8 L195.0,529.7 L201.5,510.6 L209.0,500.7 L217.1,501.5 L234.2,490.6 L254.5,485.5 L301.7,486.3 L312.6,476.6 L318.3,477.6 L335.9,469.1 L338.8,461.6 L348.7,452.5 L371.0,445.1 L380.0,445.8 L387.1,441.5 L404.4,441.2 L406.4,439.6 L408.1,436.3 L411.0,437.8 L408.2,436.0 L412.4,430.2 L408.2,432.7 L405.8,439.6 L403.4,437.0 L416.3,424.0 L415.7,431.2 L419.8,426.3 L415.6,438.6 L422.5,419.9 L426.0,422.7 L430.4,414.9 L434.8,414.9 L437.8,409.4 L450.8,401.5 L460.1,402.0 L457.7,395.6 L466.5,392.1 L470.1,386.8 L470.0,377.5 L477.5,376.2 L481.7,371.4 L482.8,365.4 L477.2,354.4 L482.9,341.2 L479.8,330.1 L485.2,325.9 L499.0,288.5 L497.7,277.6 L490.6,273.8 L491.3,269.8 L482.4,260.8 L481.7,246.5 L496.6,227.9 L499.7,228.5 L500.1,224.3 L518.6,214.6 L519.4,205.1 L522.3,202.8 L519.0,199.5 L526.5,181.6 L527.1,161.5 L522.4,157.1 L523.0,153.7 L513.6,152.5 L508.5,143.7 L500.7,142.7 L500.8,139.8 L497.6,139.7 L498.2,137.5 L496.4,137.5 L497.0,137.2 L496.9,135.0 L496.1,133.9 L494.0,132.7 L496.6,135.2 L495.2,138.5 L491.8,133.5 L480.4,132.9 L476.0,116.3 L468.7,130.8 L449.1,142.6 L448.6,155.1 L444.1,155.6 L439.8,162.0 L432.6,188.5 L423.9,199.5 L423.0,212.0 L425.2,213.9 L421.8,230.5 L400.8,255.8 L386.5,260.6 L361.7,239.9 L348.8,236.6 L342.0,236.9 L333.7,245.6 L323.7,247.2 L312.4,260.3 L306.0,258.9 L303.4,250.4 L292.7,254.1 L287.1,251.2 L282.8,257.3 L288.6,263.8 L283.3,263.5 L263.9,274.2 L264.3,280.2 L256.8,287.6 L243.3,289.7 L237.8,301.7 L221.8,295.4 L217.7,300.0 L192.8,302.6 L186.9,306.3 L182.0,317.7 L177.4,320.1 L175.4,317.0 L172.5,321.7 L165.6,322.1 L161.2,328.6 L151.1,333.7 L145.1,345.1 L127.9,356.4 L127.3,363.0 L114.6,385.1 L114.3,397.3 L110.4,405.6 L115.8,420.3 L109.6,428.3 L114.0,439.5 L110.3,445.1 L112.1,457.1 L109.9,462.0 L115.5,473.5 L104.3,488.0 L96.6,490.8 L92.4,500.1 L87.2,503.4 L86.2,511.5 L70.8,515.4 L61.9,525.1 Z"/><path class="sk-ostrov" d="M397.1,133.6 L401.4,141.8 L408.6,139.3 L412.1,144.4 L415.1,140.2 L423.6,141.3 L431.1,133.3 L441.0,134.2 L444.0,132.2 L441.4,132.4 L442.5,128.5 L444.7,132.9 L445.9,125.0 L456.8,112.3 L459.3,98.8 L473.4,90.2 L472.9,82.3 L464.0,72.8 L451.6,72.9 L439.1,59.5 L434.9,59.2 L430.8,64.9 L429.9,76.7 L424.7,82.2 L425.6,96.2 L417.4,103.9 L420.0,114.9 L400.0,126.1 L397.1,133.6 Z"/><text class="sk-ostrov-jm" x="441.2" y="66.2" text-anchor="middle">La Graciosa</text><text class="sk-ostrov-jm" x="245.2" y="313.0">LANZAROTE</text><g class="sk-meritko"><path d="M20,615 h103"/><text x="71.5" y="607" text-anchor="middle">10 km</text></g><g class="sk-sever"><path d="M561,619 l0,-34 m-7,10 l7,-10 l7,10"/><text x="561" y="635" text-anchor="middle">S</text></g><path class="sk-cesta" d="M348.7,452.1 Q376.3,454.3 399.0,438.3"/><path class="sk-cesta" d="M399.0,438.3 Q371.4,436.1 348.7,452.1"/><circle class="sk-letiste" cx="336.6" cy="449.8" r="11"/><text class="sk-znak" x="336.6" y="454.3" text-anchor="middle">✈&#xFE0E;</text><circle class="sk-dum-okoli" cx="348.7" cy="452.1" r="17"/><path class="sk-dum" d="M340.7,459.1 v-8 l8,-7 l8,7 v8 Z"/><circle class="sk-vylet" cx="399.0" cy="438.3" r="12"/><text class="sk-cislo" x="399.0" y="442.8" text-anchor="middle">1</text><text class="sk-popis" x="324.6" y="437.8" text-anchor="end">letiště</text><text class="sk-popis" x="356.7" y="478.1" text-anchor="start">náš dům (přibližně)</text><text class="sk-popis" x="413.0" y="443.3" text-anchor="start">Arrecife</text></svg>
+      <ol class="mapa-seznam"><li class="m-bydlení"><i>⌂</i><div><b>Playa Honda – tady jsme bydleli (přibližně)</b><span>11:30–17:55</span><q>Na pláži jsme strávili celé dopoledne.</q></div></li><li class="m-výlet"><i>1</i><div><b>Arrecife</b><span>20:35–22:34</span><q>já se vydal k pevnosti a majáku na pobřeží</q></div></li></ol>
+    </section>
+
+
+    <section class="blog col" aria-label="Zápis z blogu">
+      <p class="label">Tátův zápis z blogu</p>
+      <h3>Jak jsme vyměnili akvárium za moře a nelitovali</h3>
+      <p>Ráno jsme měli v plánu akvárium. Jenže někdy, když se na cestě moc dlouho váhá, osud rozhodne za vás. A tak jsme místo k nádržím s rybičkami zamířili k něčemu opravdovějšímu – k moři.</p><p>Na pláži padla první otázka dne: koupat se, nebo hledat krabíky? Kluci zvolili krabíky. Jenže pátrání po potvorách mezi kameny má tu nevýhodu, že většinou nic pořádného nenajdete. Tak jsme to otočili a šli do vody.</p><p>Máťa skočil bez váhání, Tomík měl problém. „Co když mě kousne krabík do nohy?“ ptal se a držel se zpátky. Nedivil jsem se – já měl kdysi ten samý pocit. Jenže tady je voda tak čistá, že na dno vidíte jako přes sklo. Žádná hrozba.</p><p>A tak jsme vymysleli hry: běhání z vody na břeh, házení kluků do vln, obranné manévry před příbojem. A strach zmizel. Moře je totiž nejlepší terapeut – nejdřív vás vyděsí, pak vás odnese a nakonec vám ukáže, že je to vlastně jenom velký bazén.</p><p>Na pláži jsme strávili celé dopoledne. Stavěli jsme hrad, pak největší díru na světě, pak Buckinghamský palác. Vždycky to skončilo stejně: vlna všechno vzala. A my začali znovu. Zakopávali jsme kluky do písku a hráli si, že jsou želvy. A já si říkal – možná tohle je ten opravdový důvod, proč na dovolenou jezdit. Jen to člověk musí umět přijmout.</p><p>Protože když plánujete dovolenou, chcete „vidět co nejvíc“. Ale dovolená není investice, není to akcie. Je to čas, který má smysl jen tehdy, když ho necháte plynout.</p><p>Po obědě nás čekala první místní restaurace. Google ukázal, že je to 850 metrů daleko. Ve skutečnosti jsme šli půl hodiny. Někdy se vzdálenost měří časem, jindy dětskými kroky.</p><p>Obsluha si nás moc nevšímala, ale když jsme se konečně dočkali, nelitovali jsme. Šárka měla grilovaného tuňáka a salát z rajčat, olivového oleje a něčeho, co chutnalo jako léto na talíři. My s kluky jsme dostali obrovskou mísu grilovaného masa. Bylo ho tolik, že jsme ho museli sníst, i když jsme věděli, že 5 % přes čáru. Tomík zářil – maso je jeho svět. Já pak osm hodin nepotřeboval ani sousto.</p><p>Cestou domů přišla krize. Nanuk. Tomík si ho koupil, ale nechutnal mu. A za to mohl – svět. Hlavně táta. Nabízeli jsme mu jeho oblíbené Calipo z mrazáku, ale odmítl. „Mám ho každý den. Chtěl jsem něco jiného.“ A já přemýšlel – kolikrát v životě se vlastně chováme stejně? Dostaneme to, co chceme, ale když to nechutná, vinu svalíme na všechny kolem.</p><p>Odpoledne doma bylo klidnější. Kluci malovali a sepisovali seznamy, co chtějí k Vánocům. Vzešly z toho Avengers rukavice, chatka navíc o jedno patro, a dalších pět položek, které zatím nikdo kromě nich nechápe.</p><p>Večer se nesl v duchu suvenýrů. Pro mě je to disciplína, kterou psychicky moc nedávám – stát před desátým obchodem a čekat, až si vyberou, připomíná výcvik trpělivosti, na který nemám kurz. Tak jsem navrhl: „Rozdělíme se.“ Oni šli na suvenýry, já se vydal k pevnosti a majáku na pobřeží. Obojí stálo za to. Když jsem se vrátil, potkali jsme se na dětském hřišti, dali si svačinu a uzavřeli den.</p><p>Doma se všichni sesypali do postelí. Já se ještě chvíli díval na prázdné moře z balkónu a přemýšlel.</p><p>Možná největší dar dovolené není v tom, co uvidíte. Ale v tom, že si uvědomíte, jak málo vlastně potřebujete, abyste byli šťastní – čistou vodu, trochu písku a jeden nanuk, který chutná.</p>
+    </section>
+
+    <section class="gal" aria-label="Fotky">
+      <p class="label">Fotky · 52</p>
+      <script type="application/json" class="gal-data">[
+[
+"den05/fotky/IMG_6953.jpg",
+"13:09 · Pláž",
+"pláž"
+],
+[
+"den05/fotky/IMG_6958.jpg",
+"14:58",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_6965.jpg",
+"16:24",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_6967.jpg",
+"16:33",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_6975.jpg",
+"16:34",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_6976.jpg",
+"16:34 · Rodinné selfie v restauraci",
+"rodinné selfie v restauraci"
+],
+[
+"den05/fotky/IMG_6978.jpg",
+"16:41 · Maso na talíři",
+"maso na talíři"
+],
+[
+"den05/fotky/IMG_6980.jpg",
+"16:52 · Tomík jí",
+"Tomík jí"
+],
+[
+"den05/fotky/IMG_6991.jpg",
+"16:59",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_6992.jpg",
+"16:59",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_6993.jpg",
+"16:59",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_6996.jpg",
+"16:59",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_6999.jpg",
+"17:39",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7002.jpg",
+"17:41 · Hřiště",
+"hřiště"
+],
+[
+"den05/fotky/IMG_7013.jpg",
+"20:48",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7014.jpg",
+"20:59 · Tomík u obchodu",
+"Tomík u obchodu"
+],
+[
+"den05/fotky/IMG_7017.jpg",
+"20:59",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7018.jpg",
+"20:59",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7020.jpg",
+"21:08",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7021.jpg",
+"21:09",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7023.jpg",
+"21:10",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7024.jpg",
+"21:12 · Kluci u sochy",
+"kluci u sochy"
+],
+[
+"den05/fotky/IMG_7025.jpg",
+"21:12",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7028.jpg",
+"21:13",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7029.jpg",
+"21:14 · Nábřeží",
+"nábřeží"
+],
+[
+"den05/fotky/IMG_7030.jpg",
+"21:16",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7031.jpg",
+"21:17",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7036.jpg",
+"21:31",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7037.jpg",
+"21:32 · Pevnost",
+"pevnost"
+],
+[
+"den05/fotky/IMG_7038.jpg",
+"21:33 · Hlaveň děla",
+"hlaveň děla"
+],
+[
+"den05/fotky/IMG_7039.jpg",
+"21:33",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7041.jpg",
+"21:34",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7042.jpg",
+"21:34",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7043.jpg",
+"21:34",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7045.jpg",
+"21:35",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7046.jpg",
+"21:38",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7047.jpg",
+"21:38",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7049.jpg",
+"21:46",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7050.jpg",
+"21:47 · Plachetnice",
+"plachetnice"
+],
+[
+"den05/fotky/IMG_7052.jpg",
+"21:51",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7054.jpg",
+"22:02",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7055.jpg",
+"22:02",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7056.jpg",
+"22:05 · Noční molo",
+"noční molo"
+],
+[
+"den05/fotky/IMG_7058.jpg",
+"22:11",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7062.jpg",
+"22:12",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7063.jpg",
+"22:14",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7064.jpg",
+"22:14",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7067.jpg",
+"22:15",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7070.jpg",
+"22:26",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7073.jpg",
+"22:26 · Tomík",
+"Tomík"
+],
+[
+"den05/fotky/IMG_7077.jpg",
+"22:32",
+"Fotka z sobota 16. srpna"
+],
+[
+"den05/fotky/IMG_7082.jpg",
+"22:34 · Šárka",
+"Šárka"
+]
+]</script>
+    </section>
+
+  </article>
+  <article class="entry" id="den06" data-short="Ne 17. 8." data-title="Akvárium a Jameos del Agua" hidden>
+    <div class="entry-head col">
+      <span class="date">Neděle 17. srpna</span>
+      <h2>Akvárium a Jameos del Agua</h2>
+    </div>
+
+    <section class="film" aria-label="Video" data-youtube="https://youtu.be/nFyyf9OJAcI" data-src="" data-poster="den06/video/nahled.jpg" data-title="Lanzarote – Akvárium a Jameos del Agua">
+      <div class="film-frame"></div>
+      <p class="film-cap">Vlog · Ne 17. 8. · 8:22</p>
+    </section>
+
+    <p class="lead col">Akvárium dvanáct minut od bytu – rejnok, žraloci, murény a otázka, kolik váží rejnok. Odpoledne Jameos del Agua: lávový tunel, bílí krabíci, bílý bazén s palmami a koncertní sál v jeskyni od Césara Manriqua.</p>
+
+    <section class="mapa col" aria-label="Nákres dne">
+      <p class="label">Kam jsme se vydali</p>
+      <svg class="nakres" viewBox="0 0 591 637" role="img" aria-label="Nákres ostrova: letiště, náš dům přibližně a kam jsme se vydali – akvárium, Jameos del Agua"><rect class="sk-more" width="591" height="637" rx="10"/><path class="sk-ostrov" d="M61.9,525.1 L68.9,534.8 L66.6,550.0 L71.3,560.4 L90.3,552.2 L97.8,553.5 L104.5,559.8 L108.3,556.6 L109.2,559.6 L113.0,557.1 L110.2,558.6 L112.3,555.2 L109.4,555.4 L115.4,551.4 L126.8,553.8 L127.9,555.3 L125.9,556.5 L126.6,557.6 L129.5,555.6 L131.5,559.0 L124.9,557.3 L133.3,560.7 L142.6,555.8 L153.0,565.1 L157.5,579.3 L170.5,568.4 L173.1,558.3 L184.6,545.6 L195.9,537.8 L195.0,529.7 L201.5,510.6 L209.0,500.7 L217.1,501.5 L234.2,490.6 L254.5,485.5 L301.7,486.3 L312.6,476.6 L318.3,477.6 L335.9,469.1 L338.8,461.6 L348.7,452.5 L371.0,445.1 L380.0,445.8 L387.1,441.5 L404.4,441.2 L406.4,439.6 L408.1,436.3 L411.0,437.8 L408.2,436.0 L412.4,430.2 L408.2,432.7 L405.8,439.6 L403.4,437.0 L416.3,424.0 L415.7,431.2 L419.8,426.3 L415.6,438.6 L422.5,419.9 L426.0,422.7 L430.4,414.9 L434.8,414.9 L437.8,409.4 L450.8,401.5 L460.1,402.0 L457.7,395.6 L466.5,392.1 L470.1,386.8 L470.0,377.5 L477.5,376.2 L481.7,371.4 L482.8,365.4 L477.2,354.4 L482.9,341.2 L479.8,330.1 L485.2,325.9 L499.0,288.5 L497.7,277.6 L490.6,273.8 L491.3,269.8 L482.4,260.8 L481.7,246.5 L496.6,227.9 L499.7,228.5 L500.1,224.3 L518.6,214.6 L519.4,205.1 L522.3,202.8 L519.0,199.5 L526.5,181.6 L527.1,161.5 L522.4,157.1 L523.0,153.7 L513.6,152.5 L508.5,143.7 L500.7,142.7 L500.8,139.8 L497.6,139.7 L498.2,137.5 L496.4,137.5 L497.0,137.2 L496.9,135.0 L496.1,133.9 L494.0,132.7 L496.6,135.2 L495.2,138.5 L491.8,133.5 L480.4,132.9 L476.0,116.3 L468.7,130.8 L449.1,142.6 L448.6,155.1 L444.1,155.6 L439.8,162.0 L432.6,188.5 L423.9,199.5 L423.0,212.0 L425.2,213.9 L421.8,230.5 L400.8,255.8 L386.5,260.6 L361.7,239.9 L348.8,236.6 L342.0,236.9 L333.7,245.6 L323.7,247.2 L312.4,260.3 L306.0,258.9 L303.4,250.4 L292.7,254.1 L287.1,251.2 L282.8,257.3 L288.6,263.8 L283.3,263.5 L263.9,274.2 L264.3,280.2 L256.8,287.6 L243.3,289.7 L237.8,301.7 L221.8,295.4 L217.7,300.0 L192.8,302.6 L186.9,306.3 L182.0,317.7 L177.4,320.1 L175.4,317.0 L172.5,321.7 L165.6,322.1 L161.2,328.6 L151.1,333.7 L145.1,345.1 L127.9,356.4 L127.3,363.0 L114.6,385.1 L114.3,397.3 L110.4,405.6 L115.8,420.3 L109.6,428.3 L114.0,439.5 L110.3,445.1 L112.1,457.1 L109.9,462.0 L115.5,473.5 L104.3,488.0 L96.6,490.8 L92.4,500.1 L87.2,503.4 L86.2,511.5 L70.8,515.4 L61.9,525.1 Z"/><path class="sk-ostrov" d="M397.1,133.6 L401.4,141.8 L408.6,139.3 L412.1,144.4 L415.1,140.2 L423.6,141.3 L431.1,133.3 L441.0,134.2 L444.0,132.2 L441.4,132.4 L442.5,128.5 L444.7,132.9 L445.9,125.0 L456.8,112.3 L459.3,98.8 L473.4,90.2 L472.9,82.3 L464.0,72.8 L451.6,72.9 L439.1,59.5 L434.9,59.2 L430.8,64.9 L429.9,76.7 L424.7,82.2 L425.6,96.2 L417.4,103.9 L420.0,114.9 L400.0,126.1 L397.1,133.6 Z"/><text class="sk-ostrov-jm" x="441.2" y="66.2" text-anchor="middle">La Graciosa</text><text class="sk-ostrov-jm" x="245.2" y="313.0">LANZAROTE</text><g class="sk-meritko"><path d="M20,615 h103"/><text x="71.5" y="607" text-anchor="middle">10 km</text></g><g class="sk-sever"><path d="M561,619 l0,-34 m-7,10 l7,-10 l7,10"/><text x="561" y="635" text-anchor="middle">S</text></g><path class="sk-cesta" d="M348.7,452.1 Q414.9,440.2 458.3,388.9"/><path class="sk-cesta" d="M458.3,388.9 Q519.1,311.4 516.5,212.9"/><path class="sk-cesta" d="M516.5,212.9 Q389.5,302.3 348.7,452.1"/><circle class="sk-letiste" cx="336.6" cy="449.8" r="11"/><text class="sk-znak" x="336.6" y="454.3" text-anchor="middle">✈&#xFE0E;</text><circle class="sk-dum-okoli" cx="348.7" cy="452.1" r="17"/><path class="sk-dum" d="M340.7,459.1 v-8 l8,-7 l8,7 v8 Z"/><circle class="sk-vylet" cx="458.3" cy="388.9" r="12"/><text class="sk-cislo" x="458.3" y="393.4" text-anchor="middle">1</text><circle class="sk-vylet" cx="516.5" cy="212.9" r="12"/><text class="sk-cislo" x="516.5" y="217.4" text-anchor="middle">2</text><text class="sk-popis" x="324.6" y="437.8" text-anchor="end">letiště</text><text class="sk-popis" x="356.7" y="478.1" text-anchor="start">náš dům (přibližně)</text><text class="sk-popis" x="472.3" y="393.9" text-anchor="start">akvárium</text><text class="sk-popis" x="530.5" y="217.9" text-anchor="start">Jameos del Agua</text></svg>
+      <ol class="mapa-seznam"><li class="m-bydlení"><i>⌂</i><div><b>Playa Honda – tady jsme bydleli (přibližně)</b><span>11:57–12:01</span></div></li><li class="m-výlet"><i>1</i><div><b>Aquarium Lanzarote</b><span>12:22–13:21</span><q>Bylo to skvělé. Kluci byli naprosto ohromení.</q></div></li><li class="m-výlet"><i>2</i><div><b>Jameos del Agua</b><span>14:33–16:04</span><q>Procházeli jsme lávovým tunelem, v jehož dně byla laguna se slepými bílými kraby.</q></div></li></ol>
+    </section>
+
+
+    <section class="blog col" aria-label="Zápis z blogu">
+      <p class="label">Tátův zápis z blogu</p>
+      <h3>Když se i akvárium promění v lekci o prostoru</h3>
+      <p>Ráno jsme se probudili s plánem, který už pár dní odkládáme – akvárium. Jenže už předem jsem věděl, že tohle nebude žádná bomba. Před rokem a půl jsme byli na Gran Canarii v Poema del Mar. Tam nám spadla brada – nejen z velikosti, ale i z toho, co všechno tam měli. Bylo to tak velkolepé, že cokoliv dalšího se těžko zařazuje do stejné kategorie.</p><p>Takže očekávání byla nízká. Ale i tak – kluky zvířata baví a axolotla v Česku fakt nepotkáte.</p><p>Před vchodem do akvária to vypadalo trochu jako scéna z westernu. Prázdná ulice, nikde nikdo, jen nám chyběly ty kotouče suché trávy, co vítr honí sem a tam. Už jsem skoro čekal, že se zpoza rohu vynoří Clint Eastwood. Ale lístky jsme koupili a šli dovnitř.</p><p>A víte co? Bylo to skvělé. Kluci byli naprosto ohromení. A já vlastně taky. Viděli jsme axolotla – tvora, kterému když něco utrhnete, prostě mu to doroste. Viděli jsme obří rejnoky, chobotnice, hvězdice a dokonce i piraně. A i když to celé trvalo sotva půl hodiny, šli jsme ten okruh ještě dvakrát. Protože když se dětem líbí, čas se násobí.</p><p>Samozřejmě nechyběl suvenýrový rituál. Jeden obchod nestačil, museli jsme obejít hned čtyři. V jednom Tomík upustil nějakou věc, co praskla, a zmizeli jsme rychleji než papoušek z pirátské show. Nakonec si koupil porcelánovou želvičku (její životnost tipuju na 48 hodin). Máťa sáhl po „pravém diamantu“ – modrém broušeném kameni, který přežil v jednom kuse asi půl hodiny, než si připsal první oděrku. Dětské poklady jsou prostě poklady s expirací.</p><p>Jenže hlavní program dne nás teprve čekal. Fundación César Manrique. A já musím říct – nic podobného jsem v životě neviděl.</p><p>Procházeli jsme lávovým tunelem, v jehož dně byla laguna se slepými bílými kraby. Žijí normálně hluboko v moři, tady ale našli svůj vlastní mikrosvět. Nad nimi otvor, kterým pronikalo denní světlo. Mystické, až neskutečné.</p><p>Za tunelem se otevřel kráter se zahradou a bazénem. Ten bazén vypadal obyčejně – jen beton, natřený na bílo, plný vody. Ale byl to ten nejkrásnější bazén, co jsem kdy viděl. A já si přál jen jediné – skočit do něj. Samozřejmě zákaz. Chápu. Ale bolí to.</p><p>Na bazén navazoval dům přetvořený na auditorium. Každý roh, každé schodiště nabízelo jinou perspektivu. Někdy k moři, jindy k sopečnému kráteru. Bylo to jako sen. A v tu chvíli jsem si uvědomil: velké prostory, architektura, umění – to všechno nás přinutí myslet jinak. V kanceláři přemýšlíte, kdy bude oběd. Tady přemýšlíte o tom, co byste se životem vlastně chtěli.</p><p>A možná právě proto se vyplatí občas vystoupit z každodennosti. Potřebujeme prostor, aby i naše myšlenky měly prostor.</p><p>Domů jsme se vrátili pozdě odpoledne. Já jsem byl tak vyřízený, že jsem na dvě hodiny odpadl. Kluci se Šárkou šli k moři, pak jsme se sešli u večeře a ještě skočili do Lidlu pro zásoby.</p><p>Byl to den, který mě dostal. A já jsem si říkal – možná na dovolené nehledáme jenom nové zážitky. Možná hledáme místa, která nám připomenou, že i my sami můžeme být větší, než se v běžném životě zdáme.</p>
+    </section>
+
+    <section class="gal" aria-label="Fotky">
+      <p class="label">Fotky · 56</p>
+      <script type="application/json" class="gal-data">[
+[
+"den06/fotky/IMG_7094.jpg",
+"12:26",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7095.jpg",
+"12:26 · Kluci u pokladny",
+"kluci u pokladny"
+],
+[
+"den06/fotky/IMG_7097.jpg",
+"12:30",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7098.jpg",
+"12:31",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7099.jpg",
+"12:31 · Hvězdice",
+"hvězdice"
+],
+[
+"den06/fotky/IMG_7100.jpg",
+"12:32 · Akvárium",
+"akvárium"
+],
+[
+"den06/fotky/IMG_7101.jpg",
+"12:32",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7103.jpg",
+"12:34",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7104.jpg",
+"12:34 · Rejnok mezi kameny",
+"rejnok mezi kameny"
+],
+[
+"den06/fotky/IMG_7108.jpg",
+"12:38",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7112.jpg",
+"12:42",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7115.jpg",
+"12:44",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7116.jpg",
+"12:44",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7118.jpg",
+"12:46",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7119.jpg",
+"12:46",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7120.jpg",
+"12:47",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7121.jpg",
+"12:48 · Čtverzubec",
+"čtverzubec"
+],
+[
+"den06/fotky/IMG_7123.jpg",
+"12:55",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7127.jpg",
+"13:08 · Rejnok – pohlazení",
+"rejnok – pohlazení"
+],
+[
+"den06/fotky/IMG_7128.jpg",
+"13:08",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7129.jpg",
+"13:21",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7138.jpg",
+"15:02 · Krab – znak Jameos del Agua",
+"krab – znak Jameos del Agua"
+],
+[
+"den06/fotky/IMG_7141.jpg",
+"15:07",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7143.jpg",
+"15:07 · Kaktusy v jeskyni",
+"kaktusy v jeskyni"
+],
+[
+"den06/fotky/IMG_7144.jpg",
+"15:07 · Otvor do nebe",
+"otvor do nebe"
+],
+[
+"den06/fotky/IMG_7145.jpg",
+"15:07",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7147.jpg",
+"15:07",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7150.jpg",
+"15:09",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7157.jpg",
+"15:13 · Jezírko v lávovém tunelu",
+"jezírko v lávovém tunelu"
+],
+[
+"den06/fotky/IMG_7153.jpg",
+"15:10",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7154.jpg",
+"15:11",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7156.jpg",
+"15:12",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7159.jpg",
+"15:14",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7160.jpg",
+"15:14",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7162.jpg",
+"15:15 · Rodina v jeskyni",
+"rodina v jeskyni"
+],
+[
+"den06/fotky/IMG_7163.jpg",
+"15:15",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7167.jpg",
+"15:17",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7169.jpg",
+"15:18",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7171.jpg",
+"15:21",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7173.jpg",
+"15:23 · Bílý bazén",
+"bílý bazén"
+],
+[
+"den06/fotky/IMG_7176.jpg",
+"15:25",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7177.jpg",
+"15:27 · Sál v jeskyni",
+"sál v jeskyni"
+],
+[
+"den06/fotky/IMG_7178.jpg",
+"15:27",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7181.jpg",
+"15:30",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7182.jpg",
+"15:31 · Bazén a palmy",
+"bazén a palmy"
+],
+[
+"den06/fotky/IMG_7183.jpg",
+"15:32",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7185.jpg",
+"15:33",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7187.jpg",
+"15:38",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7188.jpg",
+"15:40",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7190.jpg",
+"15:49",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7193.jpg",
+"15:54",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7194.jpg",
+"15:55",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7195.jpg",
+"15:56 · Figurky v obchodě",
+"figurky v obchodě"
+],
+[
+"den06/fotky/IMG_7196.jpg",
+"15:58",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7197.jpg",
+"15:58",
+"Fotka z neděle 17. srpna"
+],
+[
+"den06/fotky/IMG_7198.jpg",
+"16:00 · Výhled z okna",
+"výhled z okna"
+]
+]</script>
+    </section>
+
+  </article>
+  <article class="entry" id="den07" data-short="Po 18. 8." data-title="Uvnitř sopky a Las Grietas" hidden>
+    <div class="entry-head col">
+      <span class="date">Pondělí 18. srpna</span>
+      <h2>Uvnitř sopky a Las Grietas</h2>
+    </div>
+
+    <section class="film" aria-label="Video" data-youtube="https://youtu.be/H0GzkU4OFnQ" data-src="" data-poster="den07/video/nahled.jpg" data-title="Lanzarote – Uvnitř sopky a Las Grietas">
+      <div class="film-frame"></div>
+      <p class="film-cap">Vlog · Po 18. 8. · 14:06</p>
+    </section>
+
+    <p class="lead col">Ráno špízy místo řízků, pak výlet do kráteru sopky Caldera de los Cuervos. Tomík cestou přednášel o dracích, ještěrky dostaly kousky masa. Odpoledne úzké soutěsky Las Grietas a večer koupání ve větru.</p>
+
+    <section class="mapa col" aria-label="Nákres dne">
+      <p class="label">Kam jsme se vydali</p>
+      <svg class="nakres" viewBox="0 0 591 637" role="img" aria-label="Nákres ostrova: letiště, náš dům přibližně a kam jsme se vydali – Caldera de los Cuervos, Las Grietas"><rect class="sk-more" width="591" height="637" rx="10"/><path class="sk-ostrov" d="M61.9,525.1 L68.9,534.8 L66.6,550.0 L71.3,560.4 L90.3,552.2 L97.8,553.5 L104.5,559.8 L108.3,556.6 L109.2,559.6 L113.0,557.1 L110.2,558.6 L112.3,555.2 L109.4,555.4 L115.4,551.4 L126.8,553.8 L127.9,555.3 L125.9,556.5 L126.6,557.6 L129.5,555.6 L131.5,559.0 L124.9,557.3 L133.3,560.7 L142.6,555.8 L153.0,565.1 L157.5,579.3 L170.5,568.4 L173.1,558.3 L184.6,545.6 L195.9,537.8 L195.0,529.7 L201.5,510.6 L209.0,500.7 L217.1,501.5 L234.2,490.6 L254.5,485.5 L301.7,486.3 L312.6,476.6 L318.3,477.6 L335.9,469.1 L338.8,461.6 L348.7,452.5 L371.0,445.1 L380.0,445.8 L387.1,441.5 L404.4,441.2 L406.4,439.6 L408.1,436.3 L411.0,437.8 L408.2,436.0 L412.4,430.2 L408.2,432.7 L405.8,439.6 L403.4,437.0 L416.3,424.0 L415.7,431.2 L419.8,426.3 L415.6,438.6 L422.5,419.9 L426.0,422.7 L430.4,414.9 L434.8,414.9 L437.8,409.4 L450.8,401.5 L460.1,402.0 L457.7,395.6 L466.5,392.1 L470.1,386.8 L470.0,377.5 L477.5,376.2 L481.7,371.4 L482.8,365.4 L477.2,354.4 L482.9,341.2 L479.8,330.1 L485.2,325.9 L499.0,288.5 L497.7,277.6 L490.6,273.8 L491.3,269.8 L482.4,260.8 L481.7,246.5 L496.6,227.9 L499.7,228.5 L500.1,224.3 L518.6,214.6 L519.4,205.1 L522.3,202.8 L519.0,199.5 L526.5,181.6 L527.1,161.5 L522.4,157.1 L523.0,153.7 L513.6,152.5 L508.5,143.7 L500.7,142.7 L500.8,139.8 L497.6,139.7 L498.2,137.5 L496.4,137.5 L497.0,137.2 L496.9,135.0 L496.1,133.9 L494.0,132.7 L496.6,135.2 L495.2,138.5 L491.8,133.5 L480.4,132.9 L476.0,116.3 L468.7,130.8 L449.1,142.6 L448.6,155.1 L444.1,155.6 L439.8,162.0 L432.6,188.5 L423.9,199.5 L423.0,212.0 L425.2,213.9 L421.8,230.5 L400.8,255.8 L386.5,260.6 L361.7,239.9 L348.8,236.6 L342.0,236.9 L333.7,245.6 L323.7,247.2 L312.4,260.3 L306.0,258.9 L303.4,250.4 L292.7,254.1 L287.1,251.2 L282.8,257.3 L288.6,263.8 L283.3,263.5 L263.9,274.2 L264.3,280.2 L256.8,287.6 L243.3,289.7 L237.8,301.7 L221.8,295.4 L217.7,300.0 L192.8,302.6 L186.9,306.3 L182.0,317.7 L177.4,320.1 L175.4,317.0 L172.5,321.7 L165.6,322.1 L161.2,328.6 L151.1,333.7 L145.1,345.1 L127.9,356.4 L127.3,363.0 L114.6,385.1 L114.3,397.3 L110.4,405.6 L115.8,420.3 L109.6,428.3 L114.0,439.5 L110.3,445.1 L112.1,457.1 L109.9,462.0 L115.5,473.5 L104.3,488.0 L96.6,490.8 L92.4,500.1 L87.2,503.4 L86.2,511.5 L70.8,515.4 L61.9,525.1 Z"/><path class="sk-ostrov" d="M397.1,133.6 L401.4,141.8 L408.6,139.3 L412.1,144.4 L415.1,140.2 L423.6,141.3 L431.1,133.3 L441.0,134.2 L444.0,132.2 L441.4,132.4 L442.5,128.5 L444.7,132.9 L445.9,125.0 L456.8,112.3 L459.3,98.8 L473.4,90.2 L472.9,82.3 L464.0,72.8 L451.6,72.9 L439.1,59.5 L434.9,59.2 L430.8,64.9 L429.9,76.7 L424.7,82.2 L425.6,96.2 L417.4,103.9 L420.0,114.9 L400.0,126.1 L397.1,133.6 Z"/><text class="sk-ostrov-jm" x="441.2" y="66.2" text-anchor="middle">La Graciosa</text><text class="sk-ostrov-jm" x="245.2" y="313.0">LANZAROTE</text><g class="sk-meritko"><path d="M20,615 h103"/><text x="71.5" y="607" text-anchor="middle">10 km</text></g><g class="sk-sever"><path d="M561,619 l0,-34 m-7,10 l7,-10 l7,10"/><text x="561" y="635" text-anchor="middle">S</text></g><path class="sk-cesta" d="M348.7,452.1 Q314.2,409.2 260.2,398.1"/><path class="sk-cesta" d="M260.2,398.1 Q282.0,419.6 312.5,422.2"/><path class="sk-cesta" d="M312.5,422.2 Q325.2,443.7 348.7,452.1"/><circle class="sk-letiste" cx="336.6" cy="449.8" r="11"/><text class="sk-znak" x="336.6" y="454.3" text-anchor="middle">✈&#xFE0E;</text><circle class="sk-dum-okoli" cx="348.7" cy="452.1" r="17"/><path class="sk-dum" d="M340.7,459.1 v-8 l8,-7 l8,7 v8 Z"/><circle class="sk-vylet" cx="260.2" cy="398.1" r="12"/><text class="sk-cislo" x="260.2" y="402.6" text-anchor="middle">1</text><circle class="sk-vylet" cx="312.5" cy="422.2" r="12"/><text class="sk-cislo" x="312.5" y="426.7" text-anchor="middle">2</text><text class="sk-popis" x="324.6" y="437.8" text-anchor="end">letiště</text><text class="sk-popis" x="356.7" y="478.1" text-anchor="start">náš dům (přibližně)</text><text class="sk-popis" x="246.2" y="394.1" text-anchor="end">Caldera de los Cuervos</text><text class="sk-popis" x="324.5" y="410.2" text-anchor="start">Las Grietas</text></svg>
+      <ol class="mapa-seznam"><li class="m-bydlení"><i>⌂</i><div><b>Playa Honda – tady jsme bydleli (přibližně)</b><span>10:54–12:24</span></div></li><li class="m-výlet"><i>1</i><div><b>Caldera de los Cuervos</b><span>12:54–14:46</span><q>Uvnitř kráteru se otevřelo kamenné divadlo.</q></div></li><li class="m-výlet"><i>2</i><div><b>Las Grietas</b><span>15:14–16:34</span><q>někdy jako marsovská krajina, jindy jako vesmírný portál</q></div></li><li class="m-bydlení"><i>⌂</i><div><b>Playa Honda – tady jsme bydleli (přibližně)</b><span>17:11–20:33</span></div></li></ol>
+    </section>
+
+
+    <section class="blog col" aria-label="Zápis z blogu">
+      <p class="label">Tátův zápis z blogu</p>
+      <h3>Sopka, ještěrky a Irové v žabkách</h3>
+      <p>Říká se, že kdo se vydá na sopku, hledá v životě něco víc.</p><p>Já jsem ten den hledal spíš klid. Ale jak známo, na Lanzarote se tyhle dvě věci často potkávají v jednom bodě.</p><p>Ráno klasika: příprava svačiny.</p><p>Rituál, kterému rozumí každý rodič, který už někdy v životě nechal dítě hladové o půl jedné odpoledne „někde v terénu“. Bereme to vážně. Pečivo, ovoce, špízy, voda. 2,5 litru s sebou, osm v kufru auta – protože hydratace je matka přežití.</p><p>Vyrazili jsme na Volcán del Cuervo – malou, přátelskou sopku v přírodním parku Los Volcanes. Žádné výšlapy pro turisty s holemi z Decathlonu a botama za pět tisíc. Tohle je sopka, na kterou zvládnete jít i s dětmi. A právě proto jsme si ji vybrali.</p><p>Počasí? Takové to, co byste rádi zažili u bazénu, ale ne uprostřed lávového pole. Slunce začínalo pálit, ale zvládli jsme to. A jakmile jsme došli do kaldery, která se z dálky tvářila spíš jako menší kopeček, čekalo nás tiché „wow“.</p><p>Uvnitř kráteru se otevřelo kamenné divadlo. Vrstvy lávy, obnažené jako geologický dort. Ticho, černý písek, červenohnědé svahy. A pak to začalo. Ještěrky.</p><p>Jedna, druhá, dvacet.</p><p>Tomík s Máťou byli v sedmém nebi. A když někomu z nás vypadl kousek špízu, začal ještěrčí sprint roku. Krmení, pozorování, pronásledování. Náš výlet se změnil v živou přírodopisnou expedici. A já jsem si poprvé za celý týden sedl na kámen, nadechl se a na dvě minuty nemusel dělat vůbec nic. Což je, v rodičovství, něco mezi snem a legendou.</p><p>Když jsme si řekli, že máme ještě sílu, vyrazili jsme dál – směrem k Las Grietas, přírodnímu úkazu, který se v turistických brožurách často popisuje jako „mini Grand Canyon“. A já měl tu smůlu (nebo štěstí), že jsem to četl.</p><p>Zaparkovali jsme na kamenitém plácku, přičemž irská skupina před námi se rozhodla, že místo příjezdu zvolí spíš nájezd do příkopu. Obrovský oblak prachu, auto v úhlu 45 stupňů a já jsem se snažil tvářit, že tam s nimi nejsem.</p><p>V žabkách, bez vody a orientace se vydali úplně špatně. Chvíli poté, co jejich dítě spadlo z kraje stěny, následoval táta. Bylo to přesně tak nebezpečné, jak vypadalo. Ale zřejmě se rozhodli, že adrenalin mají odškrtnutý, takže nasedli do auta a odjeli.</p><p>Aniž by vůbec došli na místo, kvůli kterému sem vlastně jeli.</p><p>My jsme šli dál. Cestička vedla z vrchu dolů, k trhlinám ve skalách. Zezdola se stoupalo bezpečně, opatrně, a z každého úhlu to vypadalo jako jiný svět – někdy jako marsovská krajina, jindy jako vesmírný portál. Udělali jsme si krásné fotky. Šárka s Máťou šli napřed, nás s Tomíkem to tam ještě chvíli bavilo. Ještěrky, štěrbiny, kámen, prach. A ticho. Takové to pouštní, co se v běžném životě vůbec nevyskytuje.</p><p>Doma jsme se na chvilku zregenerovali a kolem šesté šli ještě na pláž. Slunce měklo a voda byla akorát. Plavali jsme s plaveckými brýlemi, dělali šnorchlovací sprinty bez šnorchlu, koukali na ryby, které se kolem nás míhaly jako stříbrné šipky. Dole to vypadalo jak v akváriu.</p><p>Zase jsme běhali z vody na břeh, stavěli hrady, padali do písku, a všechno to bylo přesně tak, jak má být. Bez filtru. Bez itineráře. Jen přítomnost.</p><p>Večer? Sváča, kluci do postele, ticho.</p><p>A já jsem si říkal… možná na dovolené nehledáme nové zážitky, ale maličkosti, ve kterých se konečně ztišíme.</p><p>Kráter. Ještěrka. Ryba pod hladinou. Sednutí na kámen. Dvě minuty klidu. Možná to stačí.</p>
+    </section>
+
+    <section class="gal" aria-label="Fotky">
+      <p class="label">Fotky · 57</p>
+      <script type="application/json" class="gal-data">[
+[
+"den07/fotky/IMG_7241.jpg",
+"12:59 · Začátek stezky",
+"začátek stezky"
+],
+[
+"den07/fotky/IMG_7247.jpg",
+"13:17 · Kluci na stezce",
+"kluci na stezce"
+],
+[
+"den07/fotky/IMG_7252.jpg",
+"13:18",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7248.jpg",
+"13:17",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7250.jpg",
+"13:17",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7254.jpg",
+"13:21",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7257.jpg",
+"13:23",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7262.jpg",
+"13:24 · Vstup do kráteru",
+"vstup do kráteru"
+],
+[
+"den07/fotky/IMG_7265.jpg",
+"13:26 · Kráter, Tomík",
+"kráter, Tomík"
+],
+[
+"den07/fotky/IMG_7261.jpg",
+"13:24",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7273.jpg",
+"13:40",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7275.jpg",
+"13:49",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7288.jpg",
+"14:22",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7300.jpg",
+"14:31 · Lávové pole",
+"lávové pole"
+],
+[
+"den07/fotky/IMG_7290.jpg",
+"14:24 · Láva v dlani",
+"láva v dlani"
+],
+[
+"den07/fotky/IMG_7297.jpg",
+"14:28",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7299.jpg",
+"14:29",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7305.jpg",
+"14:42",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7308.jpg",
+"14:44",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7309.jpg",
+"14:45",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7311.jpg",
+"14:46",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7316.jpg",
+"15:38 · Selfie s Tomíkem",
+"selfie s Tomíkem"
+],
+[
+"den07/fotky/IMG_7318.jpg",
+"15:38",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7319.jpg",
+"15:38",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7322.jpg",
+"15:48",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7324.jpg",
+"15:48",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7326.jpg",
+"15:50",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7329.jpg",
+"15:51 · Šárka a kluci v Las Grietas",
+"Šárka a kluci v Las Grietas"
+],
+[
+"den07/fotky/IMG_7332.jpg",
+"15:54",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7334.jpg",
+"15:55",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7336.jpg",
+"15:57",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7339.jpg",
+"15:58",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7343.jpg",
+"16:00",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7347.jpg",
+"16:01 · Stavění mužíčků",
+"stavění mužíčků"
+],
+[
+"den07/fotky/IMG_7349.jpg",
+"16:01 · Mužíčci z kamenů",
+"mužíčci z kamenů"
+],
+[
+"den07/fotky/IMG_7352.jpg",
+"16:02",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7353.jpg",
+"16:03",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7356.jpg",
+"16:04 · Rodina v soutěsce",
+"rodina v soutěsce"
+],
+[
+"den07/fotky/IMG_7359.jpg",
+"16:05",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7364.jpg",
+"16:10",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7368.jpg",
+"16:10",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7370.jpg",
+"16:11",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7375.jpg",
+"16:12",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7376.jpg",
+"16:13",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7385.jpg",
+"16:22",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7390.jpg",
+"16:22 · Selfie v soutěsce",
+"selfie v soutěsce"
+],
+[
+"den07/fotky/IMG_7393.jpg",
+"16:23",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7399.jpg",
+"16:24",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7426.jpg",
+"16:27",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7438.jpg",
+"16:28",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7440.jpg",
+"16:30",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7443.jpg",
+"16:30",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7447.jpg",
+"16:32",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7449.jpg",
+"16:34",
+"Fotka z pondělí 18. srpna"
+],
+[
+"den07/fotky/IMG_7450.jpg",
+"17:11 · Boty po výletě",
+"boty po výletě"
+],
+[
+"den07/fotky/IMG_7455.jpg",
+"20:32 · Večer na pláži",
+"večer na pláži"
+],
+[
+"den07/fotky/IMG_7457.jpg",
+"20:33",
+"Fotka z pondělí 18. srpna"
+]
+]</script>
+    </section>
+
+  </article>
+  <article class="entry" id="den09" data-short="St 20. 8." data-title="Mirador del Río, vlny a humři" hidden>
+    <div class="entry-head col">
+      <span class="date">Středa 20. srpna</span>
+      <h2>Mirador del Río, vlny a humři</h2>
+    </div>
+
+    <section class="film" aria-label="Video" data-youtube="https://youtu.be/AloMLsL_Bnk" data-src="" data-poster="den09/video/nahled.jpg" data-title="Lanzarote – Mirador del Río, vlny a humři">
+      <div class="film-frame"></div>
+      <p class="film-cap">Vlog · St 20. 8. · 12:12</p>
+    </section>
+
+    <p class="lead col">Výhled z Miradoru na ostrov La Graciosa, konečně velké vlny na pláži Cantería a náhodou objevená vesnička Órzola. Kluci lovili kraby, koupání v přírodním bazénku a večeře v restauraci plné humrů.</p>
+
+    <section class="mapa col" aria-label="Nákres dne">
+      <p class="label">Kam jsme se vydali</p>
+      <svg class="nakres" viewBox="0 0 591 637" role="img" aria-label="Nákres ostrova: letiště, náš dům přibližně a kam jsme se vydali – Mirador del Río, Órzola"><rect class="sk-more" width="591" height="637" rx="10"/><path class="sk-ostrov" d="M61.9,525.1 L68.9,534.8 L66.6,550.0 L71.3,560.4 L90.3,552.2 L97.8,553.5 L104.5,559.8 L108.3,556.6 L109.2,559.6 L113.0,557.1 L110.2,558.6 L112.3,555.2 L109.4,555.4 L115.4,551.4 L126.8,553.8 L127.9,555.3 L125.9,556.5 L126.6,557.6 L129.5,555.6 L131.5,559.0 L124.9,557.3 L133.3,560.7 L142.6,555.8 L153.0,565.1 L157.5,579.3 L170.5,568.4 L173.1,558.3 L184.6,545.6 L195.9,537.8 L195.0,529.7 L201.5,510.6 L209.0,500.7 L217.1,501.5 L234.2,490.6 L254.5,485.5 L301.7,486.3 L312.6,476.6 L318.3,477.6 L335.9,469.1 L338.8,461.6 L348.7,452.5 L371.0,445.1 L380.0,445.8 L387.1,441.5 L404.4,441.2 L406.4,439.6 L408.1,436.3 L411.0,437.8 L408.2,436.0 L412.4,430.2 L408.2,432.7 L405.8,439.6 L403.4,437.0 L416.3,424.0 L415.7,431.2 L419.8,426.3 L415.6,438.6 L422.5,419.9 L426.0,422.7 L430.4,414.9 L434.8,414.9 L437.8,409.4 L450.8,401.5 L460.1,402.0 L457.7,395.6 L466.5,392.1 L470.1,386.8 L470.0,377.5 L477.5,376.2 L481.7,371.4 L482.8,365.4 L477.2,354.4 L482.9,341.2 L479.8,330.1 L485.2,325.9 L499.0,288.5 L497.7,277.6 L490.6,273.8 L491.3,269.8 L482.4,260.8 L481.7,246.5 L496.6,227.9 L499.7,228.5 L500.1,224.3 L518.6,214.6 L519.4,205.1 L522.3,202.8 L519.0,199.5 L526.5,181.6 L527.1,161.5 L522.4,157.1 L523.0,153.7 L513.6,152.5 L508.5,143.7 L500.7,142.7 L500.8,139.8 L497.6,139.7 L498.2,137.5 L496.4,137.5 L497.0,137.2 L496.9,135.0 L496.1,133.9 L494.0,132.7 L496.6,135.2 L495.2,138.5 L491.8,133.5 L480.4,132.9 L476.0,116.3 L468.7,130.8 L449.1,142.6 L448.6,155.1 L444.1,155.6 L439.8,162.0 L432.6,188.5 L423.9,199.5 L423.0,212.0 L425.2,213.9 L421.8,230.5 L400.8,255.8 L386.5,260.6 L361.7,239.9 L348.8,236.6 L342.0,236.9 L333.7,245.6 L323.7,247.2 L312.4,260.3 L306.0,258.9 L303.4,250.4 L292.7,254.1 L287.1,251.2 L282.8,257.3 L288.6,263.8 L283.3,263.5 L263.9,274.2 L264.3,280.2 L256.8,287.6 L243.3,289.7 L237.8,301.7 L221.8,295.4 L217.7,300.0 L192.8,302.6 L186.9,306.3 L182.0,317.7 L177.4,320.1 L175.4,317.0 L172.5,321.7 L165.6,322.1 L161.2,328.6 L151.1,333.7 L145.1,345.1 L127.9,356.4 L127.3,363.0 L114.6,385.1 L114.3,397.3 L110.4,405.6 L115.8,420.3 L109.6,428.3 L114.0,439.5 L110.3,445.1 L112.1,457.1 L109.9,462.0 L115.5,473.5 L104.3,488.0 L96.6,490.8 L92.4,500.1 L87.2,503.4 L86.2,511.5 L70.8,515.4 L61.9,525.1 Z"/><path class="sk-ostrov" d="M397.1,133.6 L401.4,141.8 L408.6,139.3 L412.1,144.4 L415.1,140.2 L423.6,141.3 L431.1,133.3 L441.0,134.2 L444.0,132.2 L441.4,132.4 L442.5,128.5 L444.7,132.9 L445.9,125.0 L456.8,112.3 L459.3,98.8 L473.4,90.2 L472.9,82.3 L464.0,72.8 L451.6,72.9 L439.1,59.5 L434.9,59.2 L430.8,64.9 L429.9,76.7 L424.7,82.2 L425.6,96.2 L417.4,103.9 L420.0,114.9 L400.0,126.1 L397.1,133.6 Z"/><text class="sk-ostrov-jm" x="441.2" y="66.2" text-anchor="middle">La Graciosa</text><text class="sk-ostrov-jm" x="245.2" y="313.0">LANZAROTE</text><g class="sk-meritko"><path d="M20,615 h103"/><text x="71.5" y="607" text-anchor="middle">10 km</text></g><g class="sk-sever"><path d="M561,619 l0,-34 m-7,10 l7,-10 l7,10"/><text x="561" y="635" text-anchor="middle">S</text></g><path class="sk-cesta" d="M348.7,452.1 Q461.6,321.3 465.3,148.5"/><path class="sk-cesta" d="M465.3,148.5 Q479.9,147.3 490.4,137.0"/><path class="sk-cesta" d="M490.4,137.0 Q362.8,269.0 348.7,452.1"/><circle class="sk-letiste" cx="336.6" cy="449.8" r="11"/><text class="sk-znak" x="336.6" y="454.3" text-anchor="middle">✈&#xFE0E;</text><circle class="sk-dum-okoli" cx="348.7" cy="452.1" r="17"/><path class="sk-dum" d="M340.7,459.1 v-8 l8,-7 l8,7 v8 Z"/><circle class="sk-vylet" cx="465.3" cy="148.5" r="12"/><text class="sk-cislo" x="465.3" y="153.0" text-anchor="middle">1</text><circle class="sk-vylet" cx="490.4" cy="137.0" r="12"/><text class="sk-cislo" x="490.4" y="141.5" text-anchor="middle">2</text><text class="sk-popis" x="324.6" y="437.8" text-anchor="end">letiště</text><text class="sk-popis" x="356.7" y="478.1" text-anchor="start">náš dům (přibližně)</text><text class="sk-popis" x="451.3" y="150.5" text-anchor="end">Mirador del Río</text><text class="sk-popis" x="504.4" y="131.0" text-anchor="start">Órzola</text></svg>
+      <ol class="mapa-seznam"><li class="m-bydlení"><i>⌂</i><div><b>Playa Honda – tady jsme bydleli (přibližně)</b><span>12:02–12:07</span></div></li><li class="m-výlet"><i>1</i><div><b>Mirador del Río</b><span>13:01–14:14</span><q>Bílé emaily, černý kámen, výhled jako z letadla.</q></div></li><li class="m-výlet"><i>2</i><div><b>Órzola a pláž Cantería</b><span>14:30–20:52</span><q>Vlny větší než rodinný SUV</q></div></li></ol>
+    </section>
+
+
+    <section class="blog col" aria-label="Zápis z blogu">
+      <p class="label">Tátův zápis z blogu</p>
+      <h3>Z Miradoru do laguny bez plavek</h3>
+      <p>Existují dny, kdy si všechno pečlivě naplánujete, a stejně vám je to k ničemu. A pak jsou dny, kdy plánujete jen trochu – a přesně to stačí.</p><p>Ráno jsme zamířili na Mirador El Río – jednu z nejhezčích vyhlídek ostrova. Jízda autem byla opět připomínkou, že na Lanzarote se nejezdí rychle.</p><p>Ne že by to nešlo. Ale není to potřeba. Na každém rohu někdo fotí, nebo se snaží otočit v půlce silnice, kruhové objezdy tu mají vlastní logiku a nejvyšší doporučená rychlost je „neumírej“. Dvakrát jsem nedostal přednost. A pokaždé jsem byl rád, že jsem nejel rychleji než těch 60.</p><p>Samotný Mirador? Úžasný.</p><p>Architektura, která vypadá jako spojení přírodní jeskyně, sopečné observatoře a kulisy ze Star Wars. Žádné pravé úhly, všechno zaoblené, všechno organické. Bílé emaily, černý kámen, výhled jako z letadla.</p><p>Díváte se dolů na ostrov La Graciosa, kde není ani metr asfaltu. A Matěj, který by dřív chtěl „hlavně jet lodí!“, najednou sám od sebe řekne:</p><p>„Tati, za ty prachy si radši dáme něco pořádnýho k jídlu.“</p><p>A já si říkám – možná to není cestování, co z dětí dělá dospělé. Možná je to restaurace.</p><p>Ale nejdřív jsme ještě zajeli do vesnice Órzola.</p><p>Když jsme sešli na pláž, pochopili jsme, proč tam hned u vstupu visí zákaz koupání. Vlny větší než rodinný SUV, vítr jak z ventilátoru, který někdo omylem přepnul na „hurikán“. Lidi se samozřejmě koupali. My jsme šli jen po kolena.</p><p>A pak jsem si v mapě všiml jedné věci – jeskyně. Cesta k ní vedla kamením, mezi keři, okolo turistů, kteří měli pohorky a hole. My jsme měli sandály a optimismus. Došli jsme až na hranu vstupu… a pak jsme si to rozmysleli.</p><p>Nebyla to zbabělost. Bylo to… střízlivé zhodnocení.</p><p>A já jsem se přistihl, že mě to vůbec nemrzí. Ještě před pár lety bych tam lezl. Dneska vím, že podvrtnutý kotník vám nevezme jen večer, ale celou dovolenou. Všichni jsme udělali fotky, které vypadají jako že jsme tam byli. A to bohatě stačí.</p><p>Ale to hlavní přišlo až potom.</p><p>Cestou zpět jsme šli pobřežím a narazili jsme na lagunu, která vzniká tak, že se při přílivu voda přelije přes čedičový okraj a pak v odlivu zůstane uvnitř. Byla čistá, klidná, mělounká – a vyhřátá jako vana. Neměli jsme plavky. Tak jsme se koupali bez nich.</p><p>A možná to byl ten moment dne.</p><p>Voda hladká, slunce jemné, žádné vlny. Jen to ticho, šplouchání a pocit, že jste přesně tam, kde máte být. Tomík odmítl jít do vody – prý kvůli zadku, který by mohl někdo vidět. Ale během těch dvou hodin si vystačil s kameny, mušlemi a pozorováním mrtvých krabů.</p><p>A jak už to bývá, zrovna když jsme byli připraveni odejít, on byl připraven se koupat. Ale už nebyl čas. Turisti přicházeli. Zadek byl zase problém. A den plynul dál.</p><p>Večer jsme zakončili večeří v restauraci. Místní ryby – my s Šárkou bez obalu, kluci s obalem. Všichni spokojení. Až na tu polévku. Tu bych si znovu nedal. Ale zbytek stál za to.</p><p>A když jsme jeli zpátky, byl jsem naplněný – nejen jídlem.</p><p>Ale tím zvláštním pocitem, který na dovolené přijde jen občas:</p><p>Že náhoda je lepší plánovač než vy.</p>
+    </section>
+
+    <section class="gal" aria-label="Fotky">
+      <p class="label">Fotky · 47</p>
+      <script type="application/json" class="gal-data">[
+[
+"den09/fotky/IMG_7463.jpg",
+"13:22",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7464.jpg",
+"13:22",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7474.jpg",
+"13:29 · La Graciosa z vyhlídky",
+"La Graciosa z vyhlídky"
+],
+[
+"den09/fotky/IMG_7470.jpg",
+"13:27",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7471.jpg",
+"13:28",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7476.jpg",
+"13:30",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7478.jpg",
+"13:31 · Šárka a kluci na vyhlídce",
+"Šárka a kluci na vyhlídce"
+],
+[
+"den09/fotky/IMG_7484.jpg",
+"13:31",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7486.jpg",
+"13:33",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7487.jpg",
+"13:33",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7488.jpg",
+"13:33",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7490.jpg",
+"13:33",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7491.jpg",
+"13:37",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7492.jpg",
+"13:37",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7493.jpg",
+"13:39",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7498.jpg",
+"13:43 · Kluci nad mořem",
+"kluci nad mořem"
+],
+[
+"den09/fotky/IMG_7497.jpg",
+"13:43",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7502.jpg",
+"13:46 · Loď pod útesem",
+"loď pod útesem"
+],
+[
+"den09/fotky/IMG_7508.jpg",
+"14:34",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7510.jpg",
+"14:34",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7513.jpg",
+"14:36",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7517.jpg",
+"14:36",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7518.jpg",
+"14:36 · Tomík v kamenech",
+"Tomík v kamenech"
+],
+[
+"den09/fotky/IMG_7519.jpg",
+"14:41",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7522.jpg",
+"14:43 · Pláž",
+"pláž"
+],
+[
+"den09/fotky/IMG_7528.jpg",
+"15:40 · Tomík nad mořem",
+"Tomík nad mořem"
+],
+[
+"den09/fotky/IMG_7531.jpg",
+"15:43",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7533.jpg",
+"15:46 · Šárka a kluci nad pláží",
+"Šárka a kluci nad pláží"
+],
+[
+"den09/fotky/IMG_7536.jpg",
+"15:54",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7538.jpg",
+"15:55",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7540.jpg",
+"16:45 · Přístav",
+"přístav"
+],
+[
+"den09/fotky/IMG_7541.jpg",
+"16:45",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7542.jpg",
+"16:46",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7545.jpg",
+"17:10",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7548.jpg",
+"17:10",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7549.jpg",
+"17:10 · Tomík s krabem",
+"Tomík s krabem"
+],
+[
+"den09/fotky/IMG_7562.jpg",
+"17:45",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7564.jpg",
+"18:33",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7568.jpg",
+"18:33",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7573.jpg",
+"19:35 · Večeře",
+"večeře"
+],
+[
+"den09/fotky/IMG_7574.jpg",
+"19:44",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7575.jpg",
+"19:44",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7576.jpg",
+"19:45",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7579.jpg",
+"19:45 · Selfie s Tomíkem",
+"selfie s Tomíkem"
+],
+[
+"den09/fotky/IMG_7583.jpg",
+"19:52 · Večeře",
+"večeře"
+],
+[
+"den09/fotky/IMG_7585.jpg",
+"20:26",
+"Fotka z středa 20. srpna"
+],
+[
+"den09/fotky/IMG_7586.jpg",
+"20:39",
+"Fotka z středa 20. srpna"
+]
+]</script>
+    </section>
+
+  </article>
+  <article class="entry" id="den10" data-short="Čt 21. 8." data-title="Dům prohraný v kartách" hidden>
+    <div class="entry-head col">
+      <span class="date">Čtvrtek 21. srpna</span>
+      <h2>Dům prohraný v kartách</h2>
+    </div>
+
+    <section class="film" aria-label="Video" data-youtube="https://youtu.be/6eeU2Y6bVws" data-src="" data-poster="den10/video/nahled.jpg" data-title="Lanzarote – Dům prohraný v kartách">
+      <div class="film-frame"></div>
+      <p class="film-cap">Vlog · Čt 21. 8. · 16:11</p>
+    </section>
+
+    <p class="lead col">LagOmar – dům ve skále, který jeho majitel podle legendy prohrál v kartách. Celou prohlídku jsme hráli slovní fotbal a Tomík předváděl, jak majitel druhý den zuřil. Pak pláž Famara a nápad přespat v autě.</p>
+
+    <section class="mapa col" aria-label="Nákres dne">
+      <p class="label">Kam jsme se vydali</p>
+      <svg class="nakres" viewBox="0 0 591 637" role="img" aria-label="Nákres ostrova: letiště, náš dům přibližně a kam jsme se vydali – LagOmar, Famara"><rect class="sk-more" width="591" height="637" rx="10"/><path class="sk-ostrov" d="M61.9,525.1 L68.9,534.8 L66.6,550.0 L71.3,560.4 L90.3,552.2 L97.8,553.5 L104.5,559.8 L108.3,556.6 L109.2,559.6 L113.0,557.1 L110.2,558.6 L112.3,555.2 L109.4,555.4 L115.4,551.4 L126.8,553.8 L127.9,555.3 L125.9,556.5 L126.6,557.6 L129.5,555.6 L131.5,559.0 L124.9,557.3 L133.3,560.7 L142.6,555.8 L153.0,565.1 L157.5,579.3 L170.5,568.4 L173.1,558.3 L184.6,545.6 L195.9,537.8 L195.0,529.7 L201.5,510.6 L209.0,500.7 L217.1,501.5 L234.2,490.6 L254.5,485.5 L301.7,486.3 L312.6,476.6 L318.3,477.6 L335.9,469.1 L338.8,461.6 L348.7,452.5 L371.0,445.1 L380.0,445.8 L387.1,441.5 L404.4,441.2 L406.4,439.6 L408.1,436.3 L411.0,437.8 L408.2,436.0 L412.4,430.2 L408.2,432.7 L405.8,439.6 L403.4,437.0 L416.3,424.0 L415.7,431.2 L419.8,426.3 L415.6,438.6 L422.5,419.9 L426.0,422.7 L430.4,414.9 L434.8,414.9 L437.8,409.4 L450.8,401.5 L460.1,402.0 L457.7,395.6 L466.5,392.1 L470.1,386.8 L470.0,377.5 L477.5,376.2 L481.7,371.4 L482.8,365.4 L477.2,354.4 L482.9,341.2 L479.8,330.1 L485.2,325.9 L499.0,288.5 L497.7,277.6 L490.6,273.8 L491.3,269.8 L482.4,260.8 L481.7,246.5 L496.6,227.9 L499.7,228.5 L500.1,224.3 L518.6,214.6 L519.4,205.1 L522.3,202.8 L519.0,199.5 L526.5,181.6 L527.1,161.5 L522.4,157.1 L523.0,153.7 L513.6,152.5 L508.5,143.7 L500.7,142.7 L500.8,139.8 L497.6,139.7 L498.2,137.5 L496.4,137.5 L497.0,137.2 L496.9,135.0 L496.1,133.9 L494.0,132.7 L496.6,135.2 L495.2,138.5 L491.8,133.5 L480.4,132.9 L476.0,116.3 L468.7,130.8 L449.1,142.6 L448.6,155.1 L444.1,155.6 L439.8,162.0 L432.6,188.5 L423.9,199.5 L423.0,212.0 L425.2,213.9 L421.8,230.5 L400.8,255.8 L386.5,260.6 L361.7,239.9 L348.8,236.6 L342.0,236.9 L333.7,245.6 L323.7,247.2 L312.4,260.3 L306.0,258.9 L303.4,250.4 L292.7,254.1 L287.1,251.2 L282.8,257.3 L288.6,263.8 L283.3,263.5 L263.9,274.2 L264.3,280.2 L256.8,287.6 L243.3,289.7 L237.8,301.7 L221.8,295.4 L217.7,300.0 L192.8,302.6 L186.9,306.3 L182.0,317.7 L177.4,320.1 L175.4,317.0 L172.5,321.7 L165.6,322.1 L161.2,328.6 L151.1,333.7 L145.1,345.1 L127.9,356.4 L127.3,363.0 L114.6,385.1 L114.3,397.3 L110.4,405.6 L115.8,420.3 L109.6,428.3 L114.0,439.5 L110.3,445.1 L112.1,457.1 L109.9,462.0 L115.5,473.5 L104.3,488.0 L96.6,490.8 L92.4,500.1 L87.2,503.4 L86.2,511.5 L70.8,515.4 L61.9,525.1 Z"/><path class="sk-ostrov" d="M397.1,133.6 L401.4,141.8 L408.6,139.3 L412.1,144.4 L415.1,140.2 L423.6,141.3 L431.1,133.3 L441.0,134.2 L444.0,132.2 L441.4,132.4 L442.5,128.5 L444.7,132.9 L445.9,125.0 L456.8,112.3 L459.3,98.8 L473.4,90.2 L472.9,82.3 L464.0,72.8 L451.6,72.9 L439.1,59.5 L434.9,59.2 L430.8,64.9 L429.9,76.7 L424.7,82.2 L425.6,96.2 L417.4,103.9 L420.0,114.9 L400.0,126.1 L397.1,133.6 Z"/><text class="sk-ostrov-jm" x="441.2" y="66.2" text-anchor="middle">La Graciosa</text><text class="sk-ostrov-jm" x="245.2" y="313.0">LANZAROTE</text><g class="sk-meritko"><path d="M20,615 h103"/><text x="71.5" y="607" text-anchor="middle">10 km</text></g><g class="sk-sever"><path d="M561,619 l0,-34 m-7,10 l7,-10 l7,10"/><text x="561" y="635" text-anchor="middle">S</text></g><path class="sk-cesta" d="M348.7,452.1 Q389.7,404.5 390.9,341.7"/><path class="sk-cesta" d="M390.9,341.7 Q404.2,301.7 388.9,262.4"/><path class="sk-cesta" d="M388.9,262.4 Q334.7,350.0 348.7,452.1"/><circle class="sk-letiste" cx="336.6" cy="449.8" r="11"/><text class="sk-znak" x="336.6" y="454.3" text-anchor="middle">✈&#xFE0E;</text><circle class="sk-dum-okoli" cx="348.7" cy="452.1" r="17"/><path class="sk-dum" d="M340.7,459.1 v-8 l8,-7 l8,7 v8 Z"/><circle class="sk-vylet" cx="390.9" cy="341.7" r="12"/><text class="sk-cislo" x="390.9" y="346.2" text-anchor="middle">1</text><circle class="sk-vylet" cx="388.9" cy="262.4" r="12"/><text class="sk-cislo" x="388.9" y="266.9" text-anchor="middle">2</text><text class="sk-popis" x="324.6" y="437.8" text-anchor="end">letiště</text><text class="sk-popis" x="356.7" y="478.1" text-anchor="start">náš dům (přibližně)</text><text class="sk-popis" x="404.9" y="346.7" text-anchor="start">LagOmar</text><text class="sk-popis" x="402.9" y="267.4" text-anchor="start">Famara</text></svg>
+      <ol class="mapa-seznam"><li class="m-bydlení"><i>⌂</i><div><b>Playa Honda – tady jsme bydleli (přibližně)</b><span>10:54–12:33</span></div></li><li class="m-výlet"><i>1</i><div><b>LagOmar</b><span>13:26–15:07</span><q>Říkají tomu labyrint – a poprvé to není nadsázka.</q></div></li><li class="m-výlet"><i>2</i><div><b>Famara</b><span>15:38–15:55</span><q>V realitě to bylo jako přistání na Marsu.</q></div></li></ol>
+    </section>
+
+
+    <section class="blog col" aria-label="Zápis z blogu">
+      <p class="label">Tátův zápis z blogu</p>
+      <h3>Labyrint ve skále a pláž, kde fouká víc, než by bylo potřeba</h3>
+      <p>Některá místa vás překvapí tím, jak jiná jsou. Jiná než cokoliv, co jste kdy viděli. A pak jsou místa, která vás překvapí tím, jak jiní se cítíte vy sami, když v nich stojíte.</p><p>Lagomar byl obojí.</p><p>Zvenku ten dům působil trochu jako kulisa z filmu. Bílé křivky, surový kámen, cestičky, které se stáčejí, mizí a znovu objevují. Říkají tomu labyrint – a poprvé to není nadsázka.</p><p>Několikrát jsme si mysleli, že jsme prošli všechno. A pak… další schod, další chodba, další most. A když jsme se otočili, nevěděli jsme, kudy jsme přišli. Děti byly nadšené. My taky. Jen jsme to neřekli nahlas. V takových místech se spíš rozhlíží, než mluví.</p><p>Uvnitř domu foukal vítr. Ne ten, co bere klobouky. Ale ten, co vás lehce hladí po krku. Ten, co vás přesvědčí, že ne všechno musí být klimatizované. Některé části domu byly tak otevřené, že si člověk nebyl jistý, jestli je pořád „uvnitř“. A o to právě šlo.</p><p>A pak jsme si přečetli tenhle příběh:</p><h4>Omar Sharif a Lagomar</h4><p>Slavný dům Omara Sharifa, postavený do srdce sopečného lomu, byl navržen Césarem Manriquem pro britského developera Sama Benadyho. Ten měl vizi následovat nepravidelné tvary lávy a zbytky po těžbě, ponechat skálu viditelnou uvnitř a zkombinovat ji s bílými stěnami a zelenými rostlinami. Tak vzniklo jedinečné místo.</p><p>Tento koncept byl realizován společně s lanzarotským umělcem Jesúsem Sotem, který chtěl vytvořit prostory, jež návštěvníka přenesou do příběhů z „Tisíce a jedné noci“.</p><p>Legenda říká, že herec Omar Sharif, který v té době natáčel na Lanzarote film Tajemný ostrov, navštívil tento dům, propadl jeho kouzlu a koupil ho.</p><p>Developer, který znal Omarovu světovou pověst vášnivého hráče karet, ho pak vyzval k partii bridže. Během hry Omar dům prohrál, protože nevěděl, že jeho soupeřem je mistr Evropy v bridži.</p><p>Od té chvíle, kdy se stal na jediný den majitelem domu, Omar Sharif odešel a už se nikdy nevrátil.</p><p>Od té doby je dům znám jako Casa Omar Sharif.</p><p>A najednou celý ten prostor dostal další rozměr. Člověk se díval kolem a v duchu si přehrával scénu, ve které dům změní majitele během odpoledne, u skleničky, s bridžovým listem v ruce. A pak zase zůstane prázdný. Tiché svědectví jedné krátké vášně.</p><p>Strávili jsme tam dvě hodiny a bylo to tak akorát.</p><p>Po Lagomaru jsme zamířili na sever. Pláž Famara.</p><p>V mapě to vypadalo jako klasická pláž. V realitě to bylo jako přistání na Marsu.</p><p>Vítr všude. Vlny velikosti menších garáží. A lidé – s prkny, draky, plachtami. Tréninky surfování... kajtování.</p><p>Tomík nešel do vody vůbec – prý kvůli vlnám. Šárka taky ne. Já s Máťou jsme to zkusili. Po kolena. Pak po pás. Víc ne. Už jen kvůli respektu. Tohle moře totiž mluvilo jiným jazykem. Nebylo na hraní. Ale bylo krásné.</p><p>Pláž má pět kilometrů. My jsme ušli skoro celou tam i zpátky. Deset kilometrů v písku, s větrem v zádech i v obličeji. Byli jsme unavení. Ale taky nějak spokojení. Ten typ unavení, kdy víte, že už nic víc dneska dělat nemusíte.</p><p>Na cestě domů jsme ještě zvládli nákup v Lidlu. Pravděpodobně poslední.</p><p>Dokoupili jsme vodu – neskutečné množství vody. V tomhle vedru pít nestačí, v tomhle vedru musíte doslova tankovat.</p>
+    </section>
+
+    <section class="gal" aria-label="Fotky">
+      <p class="label">Fotky · 37</p>
+      <script type="application/json" class="gal-data">[
+[
+"den10/fotky/IMG_7592.jpg",
+"10:54",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7602.jpg",
+"13:50",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7603.jpg",
+"13:52",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7604.jpg",
+"13:52",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7605.jpg",
+"13:52",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7606.jpg",
+"13:54",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7609.jpg",
+"13:54",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7610.jpg",
+"13:54 · Šárka a kluci",
+"Šárka a kluci"
+],
+[
+"den10/fotky/IMG_7613.jpg",
+"13:55",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7615.jpg",
+"13:55",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7618.jpg",
+"13:57",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7620.jpg",
+"14:00",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7623.jpg",
+"14:02",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7626.jpg",
+"14:04",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7627.jpg",
+"14:04",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7630.jpg",
+"14:06",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7632.jpg",
+"14:08",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7633.jpg",
+"14:09",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7635.jpg",
+"14:11",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7636.jpg",
+"14:15",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7638.jpg",
+"14:17 · Omar Sharif a LagOmar",
+"Omar Sharif a LagOmar"
+],
+[
+"den10/fotky/IMG_7639.jpg",
+"14:18 · Plakát",
+"plakát"
+],
+[
+"den10/fotky/IMG_7642.jpg",
+"14:24 · Výhled z LagOmar",
+"výhled z LagOmar"
+],
+[
+"den10/fotky/IMG_7647.jpg",
+"14:32",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7649.jpg",
+"14:33",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7651.jpg",
+"14:35",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7654.jpg",
+"14:37 · Bazén ve skále",
+"bazén ve skále"
+],
+[
+"den10/fotky/IMG_7656.jpg",
+"14:38 · Bazén v LagOmar",
+"bazén v LagOmar"
+],
+[
+"den10/fotky/IMG_7659.jpg",
+"14:40",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7660.jpg",
+"14:41",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7672.jpg",
+"14:45",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7665.jpg",
+"14:44 · Šárka",
+"Šárka"
+],
+[
+"den10/fotky/IMG_7667.jpg",
+"14:44",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7671.jpg",
+"14:44",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7673.jpg",
+"14:45",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7680.jpg",
+"15:41",
+"Fotka z čtvrtek 21. srpna"
+],
+[
+"den10/fotky/IMG_7684.jpg",
+"15:55 · Pláž Famara",
+"pláž Famara"
+]
+]</script>
+    </section>
+
+  </article>
+  <article class="entry" id="den11" data-short="Pá 22. 8." data-title="Pláž, perlárna a tisícátý obchod" hidden>
+    <div class="entry-head col">
+      <span class="date">Pátek 22. srpna</span>
+      <h2>Pláž, perlárna a tisícátý obchod</h2>
+    </div>
+
+    <section class="film" aria-label="Video" data-youtube="https://youtu.be/CPwLAx4YRHQ" data-src="" data-poster="den11/video/nahled.jpg" data-title="Lanzarote – Pláž, perlárna a tisícátý obchod">
+      <div class="film-frame"></div>
+      <p class="film-cap">Vlog · Pá 22. 8. · 13:04</p>
+    </section>
+
+    <p class="lead col">Pátek, v neděli už letíme. Místo konce přistávací dráhy nakonec pláž, odpoledne Puerto del Carmen, perlárna pro Šárku a večer obchody, ze kterých kluci nechtěli odejít. Táta raději počkal u plameňáka.</p>
+
+    <section class="mapa col" aria-label="Nákres dne">
+      <p class="label">Kam jsme se vydali</p>
+      <svg class="nakres" viewBox="0 0 591 637" role="img" aria-label="Nákres ostrova: letiště, náš dům přibližně a kam jsme se vydali – Puerto del Carmen, Arrecife"><rect class="sk-more" width="591" height="637" rx="10"/><path class="sk-ostrov" d="M61.9,525.1 L68.9,534.8 L66.6,550.0 L71.3,560.4 L90.3,552.2 L97.8,553.5 L104.5,559.8 L108.3,556.6 L109.2,559.6 L113.0,557.1 L110.2,558.6 L112.3,555.2 L109.4,555.4 L115.4,551.4 L126.8,553.8 L127.9,555.3 L125.9,556.5 L126.6,557.6 L129.5,555.6 L131.5,559.0 L124.9,557.3 L133.3,560.7 L142.6,555.8 L153.0,565.1 L157.5,579.3 L170.5,568.4 L173.1,558.3 L184.6,545.6 L195.9,537.8 L195.0,529.7 L201.5,510.6 L209.0,500.7 L217.1,501.5 L234.2,490.6 L254.5,485.5 L301.7,486.3 L312.6,476.6 L318.3,477.6 L335.9,469.1 L338.8,461.6 L348.7,452.5 L371.0,445.1 L380.0,445.8 L387.1,441.5 L404.4,441.2 L406.4,439.6 L408.1,436.3 L411.0,437.8 L408.2,436.0 L412.4,430.2 L408.2,432.7 L405.8,439.6 L403.4,437.0 L416.3,424.0 L415.7,431.2 L419.8,426.3 L415.6,438.6 L422.5,419.9 L426.0,422.7 L430.4,414.9 L434.8,414.9 L437.8,409.4 L450.8,401.5 L460.1,402.0 L457.7,395.6 L466.5,392.1 L470.1,386.8 L470.0,377.5 L477.5,376.2 L481.7,371.4 L482.8,365.4 L477.2,354.4 L482.9,341.2 L479.8,330.1 L485.2,325.9 L499.0,288.5 L497.7,277.6 L490.6,273.8 L491.3,269.8 L482.4,260.8 L481.7,246.5 L496.6,227.9 L499.7,228.5 L500.1,224.3 L518.6,214.6 L519.4,205.1 L522.3,202.8 L519.0,199.5 L526.5,181.6 L527.1,161.5 L522.4,157.1 L523.0,153.7 L513.6,152.5 L508.5,143.7 L500.7,142.7 L500.8,139.8 L497.6,139.7 L498.2,137.5 L496.4,137.5 L497.0,137.2 L496.9,135.0 L496.1,133.9 L494.0,132.7 L496.6,135.2 L495.2,138.5 L491.8,133.5 L480.4,132.9 L476.0,116.3 L468.7,130.8 L449.1,142.6 L448.6,155.1 L444.1,155.6 L439.8,162.0 L432.6,188.5 L423.9,199.5 L423.0,212.0 L425.2,213.9 L421.8,230.5 L400.8,255.8 L386.5,260.6 L361.7,239.9 L348.8,236.6 L342.0,236.9 L333.7,245.6 L323.7,247.2 L312.4,260.3 L306.0,258.9 L303.4,250.4 L292.7,254.1 L287.1,251.2 L282.8,257.3 L288.6,263.8 L283.3,263.5 L263.9,274.2 L264.3,280.2 L256.8,287.6 L243.3,289.7 L237.8,301.7 L221.8,295.4 L217.7,300.0 L192.8,302.6 L186.9,306.3 L182.0,317.7 L177.4,320.1 L175.4,317.0 L172.5,321.7 L165.6,322.1 L161.2,328.6 L151.1,333.7 L145.1,345.1 L127.9,356.4 L127.3,363.0 L114.6,385.1 L114.3,397.3 L110.4,405.6 L115.8,420.3 L109.6,428.3 L114.0,439.5 L110.3,445.1 L112.1,457.1 L109.9,462.0 L115.5,473.5 L104.3,488.0 L96.6,490.8 L92.4,500.1 L87.2,503.4 L86.2,511.5 L70.8,515.4 L61.9,525.1 Z"/><path class="sk-ostrov" d="M397.1,133.6 L401.4,141.8 L408.6,139.3 L412.1,144.4 L415.1,140.2 L423.6,141.3 L431.1,133.3 L441.0,134.2 L444.0,132.2 L441.4,132.4 L442.5,128.5 L444.7,132.9 L445.9,125.0 L456.8,112.3 L459.3,98.8 L473.4,90.2 L472.9,82.3 L464.0,72.8 L451.6,72.9 L439.1,59.5 L434.9,59.2 L430.8,64.9 L429.9,76.7 L424.7,82.2 L425.6,96.2 L417.4,103.9 L420.0,114.9 L400.0,126.1 L397.1,133.6 Z"/><text class="sk-ostrov-jm" x="441.2" y="66.2" text-anchor="middle">La Graciosa</text><text class="sk-ostrov-jm" x="245.2" y="313.0">LANZAROTE</text><g class="sk-meritko"><path d="M20,615 h103"/><text x="71.5" y="607" text-anchor="middle">10 km</text></g><g class="sk-sever"><path d="M561,619 l0,-34 m-7,10 l7,-10 l7,10"/><text x="561" y="635" text-anchor="middle">S</text></g><path class="sk-cesta" d="M348.7,452.1 Q317.8,459.1 298.4,484.3"/><path class="sk-cesta" d="M298.4,484.3 Q357.0,479.4 399.0,438.3"/><path class="sk-cesta" d="M399.0,438.3 Q371.4,436.1 348.7,452.1"/><circle class="sk-letiste" cx="336.6" cy="449.8" r="11"/><text class="sk-znak" x="336.6" y="454.3" text-anchor="middle">✈&#xFE0E;</text><circle class="sk-dum-okoli" cx="348.7" cy="452.1" r="17"/><path class="sk-dum" d="M340.7,459.1 v-8 l8,-7 l8,7 v8 Z"/><circle class="sk-vylet" cx="298.4" cy="484.3" r="12"/><text class="sk-cislo" x="298.4" y="488.8" text-anchor="middle">1</text><circle class="sk-vylet" cx="399.0" cy="438.3" r="12"/><text class="sk-cislo" x="399.0" y="442.8" text-anchor="middle">2</text><text class="sk-popis" x="324.6" y="437.8" text-anchor="end">letiště</text><text class="sk-popis" x="356.7" y="478.1" text-anchor="start">náš dům (přibližně)</text><text class="sk-popis" x="286.4" y="504.3" text-anchor="end">Puerto del Carmen</text><text class="sk-popis" x="413.0" y="443.3" text-anchor="start">Arrecife</text></svg>
+      <ol class="mapa-seznam"><li class="m-bydlení"><i>⌂</i><div><b>Playa Honda – tady jsme bydleli (přibližně)</b><span>12:47–16:17</span></div></li><li class="m-výlet"><i>1</i><div><b>Puerto del Carmen a perlárna</b><span>17:40–21:18</span><q>A jedna perla nakonec padla.</q></div></li><li class="m-výlet"><i>2</i><div><b>Arrecife</b><span>21:57–22:37</span><q>Večer jsme zajeli do místního nákupního centra.</q></div></li></ol>
+    </section>
+
+
+    <section class="blog col" aria-label="Zápis z blogu">
+      <p class="label">Tátův zápis z blogu</p>
+      <h3>Mezi šneky, perlami a opicemi na gumě</h3>
+      <p>Ráno jsme vyrazili na pláž. Ne do vody – ne hned.</p><p>Cílem byla přistávací dráha. Doslova konec runway – místo, odkud se dají sledovat letadla, jak přistávají těsně nad hlavou. Jenže jak už to tak bývá, když si něco naplánujete, příroda to naplánuje jinak. Zřejmě se změnilo proudění vzduchu, protože letadla přistávala i startovala z opačné strany než obvykle.</p><p>A tak jsme… šli do vody.</p><p>Šárka si šla zacvičit, já s klukama do moře.</p><p>Voda byla nejklidnější, co jsme tady zažili. Téměř žádné vlny, až jsme měli pocit, že stojíme u jezera. Očekával bych, že v takové vodě bude spousta ryb – ale ne. Poprvé jsme neviděli ani šupinu.</p><p>Ale nevadilo to. Děti neřeší, co nevidí. Děti si vymyslí, co chtějí vidět.</p><p>Stavěli jsme věže z písku, Tomík mi ve vodě naskočil na záda a hráli jsme si na „Lochnesský expres“. Vypadáme jako želva. Já dělám tělo, on krunýř. Máťa si plave sám – s přehledem, sebejistotou, bez jakéhokoliv „tati, pojď se mnou“. Už je to ryba.</p><p>Kolem druhé jsem skočil domů udělat oběd. Najedli jsme se a pak přišla… Perlárna.</p><p>Perlárnou říkáme obchod s perlami.</p><p>Není to úplně moje disciplína, ale někdy je potřeba být ten, kdo nese vodu, drží tašky a říká „to je moc pěkný“. Šárka vybírala, zkoušela, rozhodovala. A jedna perla nakonec padla.</p><p>Perlárna byla v Playa Blanca – jednom z nejvíc turistických míst ostrova.</p><p>Bylo to jako přijet z venkova do Disneylandu. Kavárny, suvenýry, půjčovny elektrokol, nabídky na jízdu ponorkou a desítky stánků s opicemi na gumě.</p><p>Naše děti, samozřejmě, přitahovány magnetickou silou. Vyjednávání, co si koupíme, co si nekoupíme, co už máme a co rozhodně ještě „potřebujeme“.</p><p>A pak jsme šli k místnímu moři. Jen tak se projít. A našli jsme kamenitou pláž, kde se kluci pustili do sbírání šneků. Člověk by řekl, že už je šnečí etapa za námi. Ale není. A tak jsme tam strávili hodinu a půl sbíráním, tříděním, hodnocením a občasným ujišťováním:</p><p>„Jo, tohle vypadá jako fakt dobrý šnek.“</p><p>A pak jsme se vydali na procházku po promenádě. Nádherná, široká, stylovější než cokoliv, co jsme zatím viděli. Ale zároveň jako kdyby vám dovolenou někdo navlékl do kostýmu maskota. Krásné, ale hrané.</p><p>Každá restaurace měla svého naháněče. Všichni nabízeli slevy, lákali, ukazovali menu, které vypadalo úplně stejně jako to vedle. A já jsem si říkal – tohle je taky součást reality. Jen ne té naší.</p><p>Večer jsme zajeli do místního nákupního centra. Potřebovali jsme ještě něco na poslední dny. Ale přišly i další obchody s opicemi. Další plastové meče. Další přesvědčování, že „už máme úplně všechno“. A pak už jen cesta domů, večeře, děti do postele.</p><p>Zítra je poslední celý den.</p><p>Každý den tu má svůj rytmus. Někdy ho určují letadla. Někdy šneci. A někdy perly, které si přivezete, aniž byste po nic toužili (pokud jste muž).</p>
+    </section>
+
+    <section class="gal" aria-label="Fotky">
+      <p class="label">Fotky · 50</p>
+      <script type="application/json" class="gal-data">[
+[
+"den11/fotky/IMG_7686.jpg",
+"12:47",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7690.jpg",
+"13:07",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7691.jpg",
+"13:07 · Molo na pláži",
+"molo na pláži"
+],
+[
+"den11/fotky/IMG_7700.jpg",
+"17:48",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7701.jpg",
+"17:48",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7702.jpg",
+"17:50",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7703.jpg",
+"17:51",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7704.jpg",
+"17:51",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7707.jpg",
+"17:52 · Barevné suvenýry",
+"barevné suvenýry"
+],
+[
+"den11/fotky/IMG_7709.jpg",
+"17:53",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7711.jpg",
+"17:54",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7717.jpg",
+"17:56",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7715.jpg",
+"17:56",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7720.jpg",
+"18:03",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7721.jpg",
+"18:03",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7723.jpg",
+"18:10 · Kluci pijí",
+"kluci pijí"
+],
+[
+"den11/fotky/IMG_7728.jpg",
+"18:16 · Šárka v perlárně",
+"Šárka v perlárně"
+],
+[
+"den11/fotky/IMG_7729.jpg",
+"18:22 · Perla v lastuře",
+"perla v lastuře"
+],
+[
+"den11/fotky/IMG_7730.jpg",
+"18:32",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7731.jpg",
+"18:36",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7732.jpg",
+"18:36",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7733.jpg",
+"18:43 · Tomík v perlárně",
+"Tomík v perlárně"
+],
+[
+"den11/fotky/IMG_7736.jpg",
+"18:57",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7737.jpg",
+"18:58",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7738.jpg",
+"19:02 · Pobřeží",
+"pobřeží"
+],
+[
+"den11/fotky/IMG_7739.jpg",
+"19:04",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7743.jpg",
+"19:39",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7744.jpg",
+"19:39",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7745.jpg",
+"19:41",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7748.jpg",
+"19:54 · Pláž večer",
+"pláž večer"
+],
+[
+"den11/fotky/IMG_7749.jpg",
+"19:58",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7752.jpg",
+"20:01",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7754.jpg",
+"20:01 · Pláž, palmy (oblíbená)",
+"pláž, palmy (oblíbená)"
+],
+[
+"den11/fotky/IMG_7755.jpg",
+"20:12",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7758.jpg",
+"20:13",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7761.jpg",
+"20:21",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7762.jpg",
+"20:23",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7766.jpg",
+"20:27 · Západ slunce s palmou",
+"západ slunce s palmou"
+],
+[
+"den11/fotky/IMG_7765.jpg",
+"20:27",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7767.jpg",
+"20:30",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7769.jpg",
+"20:42",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7773.jpg",
+"20:51",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7775.jpg",
+"20:52 · Šárka s plameňákem",
+"Šárka s plameňákem"
+],
+[
+"den11/fotky/IMG_7777.jpg",
+"20:52",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7781.jpg",
+"20:53 · Pavel a Šárka s plameňákem",
+"Pavel a Šárka s plameňákem"
+],
+[
+"den11/fotky/IMG_7785.jpg",
+"21:17 · Západ slunce",
+"západ slunce"
+],
+[
+"den11/fotky/IMG_7786.jpg",
+"21:17",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7787.jpg",
+"21:18",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7789.jpg",
+"21:57",
+"Fotka z pátek 22. srpna"
+],
+[
+"den11/fotky/IMG_7793.jpg",
+"22:10",
+"Fotka z pátek 22. srpna"
+]
+]</script>
+    </section>
+
+  </article>
+  <article class="entry" id="den12" data-short="So 23. 8." data-title="Nejlepší koupání" hidden>
+    <div class="entry-head col">
+      <span class="date">Sobota 23. srpna</span>
+      <h2>Nejlepší koupání</h2>
+    </div>
+
+    <section class="film" aria-label="Video" data-youtube="https://youtu.be/pQzd80n5yQo" data-src="" data-poster="den12/fotky/IMG_7804.jpg" data-title="Lanzarote – Nejlepší koupání">
+      <div class="film-frame"></div>
+      <p class="film-cap">Vlog · So 23. 8. · 8:51</p>
+    </section>
+
+    <p class="lead col">Poslední celý den. Plán byl jet na pláže Papagayo, ale voda pod perlárnou byla tak krásná, že jsme zůstali: mrak ryb jako z National Geographic. Večer shrnutí – tahle dovolená patří mezi dvě nejlepší.</p>
+
+    <section class="mapa col" aria-label="Nákres dne">
+      <p class="label">Kam jsme se vydali</p>
+      <svg class="nakres" viewBox="0 0 591 637" role="img" aria-label="Nákres ostrova: letiště, náš dům přibližně a kam jsme se vydali – Puerto del Carmen"><rect class="sk-more" width="591" height="637" rx="10"/><path class="sk-ostrov" d="M61.9,525.1 L68.9,534.8 L66.6,550.0 L71.3,560.4 L90.3,552.2 L97.8,553.5 L104.5,559.8 L108.3,556.6 L109.2,559.6 L113.0,557.1 L110.2,558.6 L112.3,555.2 L109.4,555.4 L115.4,551.4 L126.8,553.8 L127.9,555.3 L125.9,556.5 L126.6,557.6 L129.5,555.6 L131.5,559.0 L124.9,557.3 L133.3,560.7 L142.6,555.8 L153.0,565.1 L157.5,579.3 L170.5,568.4 L173.1,558.3 L184.6,545.6 L195.9,537.8 L195.0,529.7 L201.5,510.6 L209.0,500.7 L217.1,501.5 L234.2,490.6 L254.5,485.5 L301.7,486.3 L312.6,476.6 L318.3,477.6 L335.9,469.1 L338.8,461.6 L348.7,452.5 L371.0,445.1 L380.0,445.8 L387.1,441.5 L404.4,441.2 L406.4,439.6 L408.1,436.3 L411.0,437.8 L408.2,436.0 L412.4,430.2 L408.2,432.7 L405.8,439.6 L403.4,437.0 L416.3,424.0 L415.7,431.2 L419.8,426.3 L415.6,438.6 L422.5,419.9 L426.0,422.7 L430.4,414.9 L434.8,414.9 L437.8,409.4 L450.8,401.5 L460.1,402.0 L457.7,395.6 L466.5,392.1 L470.1,386.8 L470.0,377.5 L477.5,376.2 L481.7,371.4 L482.8,365.4 L477.2,354.4 L482.9,341.2 L479.8,330.1 L485.2,325.9 L499.0,288.5 L497.7,277.6 L490.6,273.8 L491.3,269.8 L482.4,260.8 L481.7,246.5 L496.6,227.9 L499.7,228.5 L500.1,224.3 L518.6,214.6 L519.4,205.1 L522.3,202.8 L519.0,199.5 L526.5,181.6 L527.1,161.5 L522.4,157.1 L523.0,153.7 L513.6,152.5 L508.5,143.7 L500.7,142.7 L500.8,139.8 L497.6,139.7 L498.2,137.5 L496.4,137.5 L497.0,137.2 L496.9,135.0 L496.1,133.9 L494.0,132.7 L496.6,135.2 L495.2,138.5 L491.8,133.5 L480.4,132.9 L476.0,116.3 L468.7,130.8 L449.1,142.6 L448.6,155.1 L444.1,155.6 L439.8,162.0 L432.6,188.5 L423.9,199.5 L423.0,212.0 L425.2,213.9 L421.8,230.5 L400.8,255.8 L386.5,260.6 L361.7,239.9 L348.8,236.6 L342.0,236.9 L333.7,245.6 L323.7,247.2 L312.4,260.3 L306.0,258.9 L303.4,250.4 L292.7,254.1 L287.1,251.2 L282.8,257.3 L288.6,263.8 L283.3,263.5 L263.9,274.2 L264.3,280.2 L256.8,287.6 L243.3,289.7 L237.8,301.7 L221.8,295.4 L217.7,300.0 L192.8,302.6 L186.9,306.3 L182.0,317.7 L177.4,320.1 L175.4,317.0 L172.5,321.7 L165.6,322.1 L161.2,328.6 L151.1,333.7 L145.1,345.1 L127.9,356.4 L127.3,363.0 L114.6,385.1 L114.3,397.3 L110.4,405.6 L115.8,420.3 L109.6,428.3 L114.0,439.5 L110.3,445.1 L112.1,457.1 L109.9,462.0 L115.5,473.5 L104.3,488.0 L96.6,490.8 L92.4,500.1 L87.2,503.4 L86.2,511.5 L70.8,515.4 L61.9,525.1 Z"/><path class="sk-ostrov" d="M397.1,133.6 L401.4,141.8 L408.6,139.3 L412.1,144.4 L415.1,140.2 L423.6,141.3 L431.1,133.3 L441.0,134.2 L444.0,132.2 L441.4,132.4 L442.5,128.5 L444.7,132.9 L445.9,125.0 L456.8,112.3 L459.3,98.8 L473.4,90.2 L472.9,82.3 L464.0,72.8 L451.6,72.9 L439.1,59.5 L434.9,59.2 L430.8,64.9 L429.9,76.7 L424.7,82.2 L425.6,96.2 L417.4,103.9 L420.0,114.9 L400.0,126.1 L397.1,133.6 Z"/><text class="sk-ostrov-jm" x="441.2" y="66.2" text-anchor="middle">La Graciosa</text><text class="sk-ostrov-jm" x="245.2" y="313.0">LANZAROTE</text><g class="sk-meritko"><path d="M20,615 h103"/><text x="71.5" y="607" text-anchor="middle">10 km</text></g><g class="sk-sever"><path d="M561,619 l0,-34 m-7,10 l7,-10 l7,10"/><text x="561" y="635" text-anchor="middle">S</text></g><path class="sk-cesta" d="M348.7,452.1 Q317.8,459.1 298.4,484.3"/><path class="sk-cesta" d="M298.4,484.3 Q329.3,477.3 348.7,452.1"/><circle class="sk-letiste" cx="336.6" cy="449.8" r="11"/><text class="sk-znak" x="336.6" y="454.3" text-anchor="middle">✈&#xFE0E;</text><circle class="sk-dum-okoli" cx="348.7" cy="452.1" r="17"/><path class="sk-dum" d="M340.7,459.1 v-8 l8,-7 l8,7 v8 Z"/><circle class="sk-vylet" cx="298.4" cy="484.3" r="12"/><text class="sk-cislo" x="298.4" y="488.8" text-anchor="middle">1</text><text class="sk-popis" x="324.6" y="437.8" text-anchor="end">letiště</text><text class="sk-popis" x="356.7" y="478.1" text-anchor="start">náš dům (přibližně)</text><text class="sk-popis" x="286.4" y="504.3" text-anchor="end">Puerto del Carmen</text></svg>
+      <ol class="mapa-seznam"><li class="m-bydlení"><i>⌂</i><div><b>Playa Honda – tady jsme bydleli (přibližně)</b><span>12:50</span></div></li><li class="m-výlet"><i>1</i><div><b>Puerto del Carmen a perlárna</b><span>13:53–20:39</span></div></li><li class="m-bydlení"><i>⌂</i><div><b>Playa Honda – tady jsme bydleli (přibližně)</b><span>23:41</span></div></li></ol>
+    </section>
+
+
+    <section class="gal" aria-label="Fotky">
+      <p class="label">Fotky · 32</p>
+      <script type="application/json" class="gal-data">[
+[
+"den12/fotky/IMG_7799.jpg",
+"12:50",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7804.jpg",
+"16:41 · Průzračná voda",
+"průzračná voda"
+],
+[
+"den12/fotky/IMG_7809.jpg",
+"16:41",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7816.jpg",
+"17:40 · V moři",
+"v moři"
+],
+[
+"den12/fotky/IMG_7818.jpg",
+"17:40",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7826.jpg",
+"18:01 · Tomík zabalený v ručníku",
+"Tomík zabalený v ručníku"
+],
+[
+"den12/fotky/IMG_7834.jpg",
+"19:07",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7835.jpg",
+"19:07",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7836.jpg",
+"19:08",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7837.jpg",
+"19:09",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7838.jpg",
+"19:09",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7839.jpg",
+"19:12",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7840.jpg",
+"19:14",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7843.jpg",
+"19:49",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7844.jpg",
+"19:55",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7845.jpg",
+"20:12 · Večeře venku",
+"večeře venku"
+],
+[
+"den12/fotky/IMG_7853.jpg",
+"20:13",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7854.jpg",
+"20:13",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7856.jpg",
+"20:14",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7859.jpg",
+"20:14",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7862.jpg",
+"20:15",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7864.jpg",
+"20:15",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7865.jpg",
+"20:15 · Kluci s pohledy při západu",
+"kluci s pohledy při západu"
+],
+[
+"den12/fotky/IMG_7868.jpg",
+"20:26 · Tomík v obchodě",
+"Tomík v obchodě"
+],
+[
+"den12/fotky/IMG_7869.jpg",
+"20:26",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7870.jpg",
+"20:27",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7871.jpg",
+"20:27",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7872.jpg",
+"20:27",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7873.jpg",
+"20:27",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7874.jpg",
+"20:30 · Pohledy",
+"pohledy"
+],
+[
+"den12/fotky/IMG_7875.jpg",
+"20:32",
+"Fotka z sobota 23. srpna"
+],
+[
+"den12/fotky/IMG_7876.jpg",
+"20:39",
+"Fotka z sobota 23. srpna"
+]
+]</script>
+    </section>
+
+  </article>
+  <article class="entry" id="den13" data-short="Ne 24. 8." data-title="Cesta domů" hidden>
+    <div class="entry-head col">
+      <span class="date">Neděle 24. srpna</span>
+      <h2>Cesta domů</h2>
+    </div>
+
+    <section class="film" aria-label="Video" data-youtube="https://youtu.be/j-eXdwAc6BI" data-src="" data-poster="den13/video/nahled.jpg" data-title="Lanzarote – Cesta domů">
+      <div class="film-frame"></div>
+      <p class="film-cap">Vlog · Ne 24. 8. · 2:46</p>
+    </section>
+
+    <p class="lead col">Vrácení auta – za celou dobu ani jedno škrábnutí a necelá nádrž. Přes Curych domů do Prahy, kluci s kolou, mobilem a letadlem: nejlepší na světě.</p>
+
+    <section class="mapa col" aria-label="Nákres dne">
+      <p class="label">Kam jsme se vydali</p>
+      <svg class="nakres" viewBox="0 0 591 637" role="img" aria-label="Nákres ostrova: letiště, náš dům přibližně a kam jsme se vydali – u moře u domu"><rect class="sk-more" width="591" height="637" rx="10"/><path class="sk-ostrov" d="M61.9,525.1 L68.9,534.8 L66.6,550.0 L71.3,560.4 L90.3,552.2 L97.8,553.5 L104.5,559.8 L108.3,556.6 L109.2,559.6 L113.0,557.1 L110.2,558.6 L112.3,555.2 L109.4,555.4 L115.4,551.4 L126.8,553.8 L127.9,555.3 L125.9,556.5 L126.6,557.6 L129.5,555.6 L131.5,559.0 L124.9,557.3 L133.3,560.7 L142.6,555.8 L153.0,565.1 L157.5,579.3 L170.5,568.4 L173.1,558.3 L184.6,545.6 L195.9,537.8 L195.0,529.7 L201.5,510.6 L209.0,500.7 L217.1,501.5 L234.2,490.6 L254.5,485.5 L301.7,486.3 L312.6,476.6 L318.3,477.6 L335.9,469.1 L338.8,461.6 L348.7,452.5 L371.0,445.1 L380.0,445.8 L387.1,441.5 L404.4,441.2 L406.4,439.6 L408.1,436.3 L411.0,437.8 L408.2,436.0 L412.4,430.2 L408.2,432.7 L405.8,439.6 L403.4,437.0 L416.3,424.0 L415.7,431.2 L419.8,426.3 L415.6,438.6 L422.5,419.9 L426.0,422.7 L430.4,414.9 L434.8,414.9 L437.8,409.4 L450.8,401.5 L460.1,402.0 L457.7,395.6 L466.5,392.1 L470.1,386.8 L470.0,377.5 L477.5,376.2 L481.7,371.4 L482.8,365.4 L477.2,354.4 L482.9,341.2 L479.8,330.1 L485.2,325.9 L499.0,288.5 L497.7,277.6 L490.6,273.8 L491.3,269.8 L482.4,260.8 L481.7,246.5 L496.6,227.9 L499.7,228.5 L500.1,224.3 L518.6,214.6 L519.4,205.1 L522.3,202.8 L519.0,199.5 L526.5,181.6 L527.1,161.5 L522.4,157.1 L523.0,153.7 L513.6,152.5 L508.5,143.7 L500.7,142.7 L500.8,139.8 L497.6,139.7 L498.2,137.5 L496.4,137.5 L497.0,137.2 L496.9,135.0 L496.1,133.9 L494.0,132.7 L496.6,135.2 L495.2,138.5 L491.8,133.5 L480.4,132.9 L476.0,116.3 L468.7,130.8 L449.1,142.6 L448.6,155.1 L444.1,155.6 L439.8,162.0 L432.6,188.5 L423.9,199.5 L423.0,212.0 L425.2,213.9 L421.8,230.5 L400.8,255.8 L386.5,260.6 L361.7,239.9 L348.8,236.6 L342.0,236.9 L333.7,245.6 L323.7,247.2 L312.4,260.3 L306.0,258.9 L303.4,250.4 L292.7,254.1 L287.1,251.2 L282.8,257.3 L288.6,263.8 L283.3,263.5 L263.9,274.2 L264.3,280.2 L256.8,287.6 L243.3,289.7 L237.8,301.7 L221.8,295.4 L217.7,300.0 L192.8,302.6 L186.9,306.3 L182.0,317.7 L177.4,320.1 L175.4,317.0 L172.5,321.7 L165.6,322.1 L161.2,328.6 L151.1,333.7 L145.1,345.1 L127.9,356.4 L127.3,363.0 L114.6,385.1 L114.3,397.3 L110.4,405.6 L115.8,420.3 L109.6,428.3 L114.0,439.5 L110.3,445.1 L112.1,457.1 L109.9,462.0 L115.5,473.5 L104.3,488.0 L96.6,490.8 L92.4,500.1 L87.2,503.4 L86.2,511.5 L70.8,515.4 L61.9,525.1 Z"/><path class="sk-ostrov" d="M397.1,133.6 L401.4,141.8 L408.6,139.3 L412.1,144.4 L415.1,140.2 L423.6,141.3 L431.1,133.3 L441.0,134.2 L444.0,132.2 L441.4,132.4 L442.5,128.5 L444.7,132.9 L445.9,125.0 L456.8,112.3 L459.3,98.8 L473.4,90.2 L472.9,82.3 L464.0,72.8 L451.6,72.9 L439.1,59.5 L434.9,59.2 L430.8,64.9 L429.9,76.7 L424.7,82.2 L425.6,96.2 L417.4,103.9 L420.0,114.9 L400.0,126.1 L397.1,133.6 Z"/><text class="sk-ostrov-jm" x="441.2" y="66.2" text-anchor="middle">La Graciosa</text><text class="sk-ostrov-jm" x="245.2" y="313.0">LANZAROTE</text><g class="sk-meritko"><path d="M20,615 h103"/><text x="71.5" y="607" text-anchor="middle">10 km</text></g><g class="sk-sever"><path d="M561,619 l0,-34 m-7,10 l7,-10 l7,10"/><text x="561" y="635" text-anchor="middle">S</text></g><path class="sk-cesta" d="M348.7,452.1 Q343.1,448.8 336.6,449.8"/><circle class="sk-letiste" cx="336.6" cy="449.8" r="11"/><text class="sk-znak" x="336.6" y="454.3" text-anchor="middle">✈&#xFE0E;</text><circle class="sk-dum-okoli" cx="348.7" cy="452.1" r="17"/><path class="sk-dum" d="M340.7,459.1 v-8 l8,-7 l8,7 v8 Z"/><text class="sk-popis" x="324.6" y="437.8" text-anchor="end">letiště</text><text class="sk-popis" x="356.7" y="478.1" text-anchor="start">náš dům (přibližně)</text><text class="sk-let" x="22" y="36">✈&#xFE0E; Lanzarote → Curych → Praha</text></svg>
+      <ol class="mapa-seznam"><li class="m-bydlení"><i>⌂</i><div><b>Playa Honda – tady jsme bydleli (přibližně)</b><span>08:29–08:56</span></div></li><li class="m-letiště"><i>✈&#xFE0E;</i><div><b>Letiště Lanzarote</b><span>09:07–09:59</span></div></li><li class="m-letiště"><i>✈&#xFE0E;</i><div><b>Přestup v Curychu</b><span>15:23–17:20</span></div></li><li class="m-letiště"><i>✈&#xFE0E;</i><div><b>Letiště Praha</b><span>18:54</span></div></li></ol>
+    </section>
+
+
+    <section class="gal" aria-label="Fotky">
+      <p class="label">Fotky · 8</p>
+      <script type="application/json" class="gal-data">[
+[
+"den13/fotky/IMG_7892.jpg",
+"09:29",
+"Fotka z neděle 24. srpna"
+],
+[
+"den13/fotky/IMG_7894.jpg",
+"09:59",
+"Fotka z neděle 24. srpna"
+],
+[
+"den13/fotky/IMG_7902.jpg",
+"15:23 · Okno letadla",
+"okno letadla"
+],
+[
+"den13/fotky/IMG_7909.jpg",
+"16:13 · Letiště",
+"letiště"
+],
+[
+"den13/fotky/IMG_7907.jpg",
+"16:11",
+"Fotka z neděle 24. srpna"
+],
+[
+"den13/fotky/IMG_7910.jpg",
+"17:10",
+"Fotka z neděle 24. srpna"
+],
+[
+"den13/fotky/IMG_7911.jpg",
+"17:10 · Šárka v letadle",
+"Šárka v letadle"
+],
+[
+"den13/fotky/IMG_7914.jpg",
+"17:20",
+"Fotka z neděle 24. srpna"
+]
+]</script>
+    </section>
+
+  </article>
+  </main>
+
+  <footer class="col">Lanzarote · 12.–24. 8. 2025 · Pavel, Šárka, Máťa a Tomík</footer>
+</div>
+
+<div class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-label="Fotka">
+  <div class="bar"><span id="v-cap"></span><button id="v-close">Zavřít</button></div>
+  <div class="stage" id="v-stage"><img id="v-img" alt=""></div>
+  <div class="nav"><button id="v-prev">← Předchozí</button><span id="v-count"></span><button id="v-next">Další →</button></div>
+</div>
+
+<script>
+const entries = [...document.querySelectorAll(".entry")];
+const days = document.getElementById("days");
+const thumb = src => src.replace(/\/([^/]+)$/, "/nahled/$1");
+
+// dny, které teprve přijdou: v navigaci šedě „brzy“. Když den dostane zápis, smazat ho odsud.
+const COMING = [
+  ["2025-08-19", "Út 19. 8.", "Den volna – bez záběrů"],
+];
+const now = new Date();
+const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+
+// navigace: hotové dny jako odkazy, pak dny, které přijdou, šedě
+for (const e of entries) {
+  const a = document.createElement("a");
+  a.href = `#${e.id}`;
+  a.innerHTML = `<b>${e.dataset.short}</b><small>${e.dataset.title}</small>`;
+  days.append(a);
+}
+for (const [date, short, title] of COMING) {
+  const after = days.querySelector('a[href="#den07"]');
+  const span = document.createElement("span");
+  span.className = date === today ? "soon today" : "soon";
+  span.innerHTML = `<b>${short}</b><small>${title} </small>`;
+  after ? after.after(span) : days.append(span);
+}
+
+// video z YouTube: z odkazu v data-youtube vezme číslo videa; bez odkazu jen náhled
+const youtubeId = s => (s.match(/(?:youtu\.be\/|[?&]v=|embed\/|shorts\/|live\/)([\w-]{11})/) || s.match(/^([\w-]{11})$/) || [])[1];
+function setupFilm(entry) {
+  const film = entry.querySelector(".film");
+  if (!film) return;
+  const frame = film.querySelector(".film-frame");
+  const id = youtubeId(film.dataset.youtube.trim());
+  if (id) {
+    frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?rel=0" title="${film.dataset.title}"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+  } else if (film.dataset.src) {
+    frame.innerHTML = `<video controls preload="none" playsinline poster="${film.dataset.poster}" src="${film.dataset.src}"></video>`;
+  } else {
+    frame.innerHTML = `<img src="${film.dataset.poster}" alt=""><span class="film-soon">Video brzy<small>Přidáme ho sem, až bude na YouTube.</small></span>`;
+  }
+}
+
+// galerie: velká fotka, šipky, náhledy pod ní, klepnutím přes celou obrazovku
+function setupGallery(gal) {
+  const photos = JSON.parse(gal.querySelector(".gal-data").textContent);
+  gal.insertAdjacentHTML("beforeend", `
+    <div class="gal-stage">
+      <img alt="">
+      <button class="gal-nav gal-prev" aria-label="Předchozí fotka">‹</button>
+      <button class="gal-nav gal-next" aria-label="Další fotka">›</button>
+      <span class="gal-count"></span>
+      <button class="gal-full">Zvětšit</button>
+    </div>
+    <p class="gal-cap"></p>
+    <div class="gal-strip" role="list"></div>`);
+  const img = gal.querySelector(".gal-stage > img");
+  const cap = gal.querySelector(".gal-cap");
+  const count = gal.querySelector(".gal-count");
+  const strip = gal.querySelector(".gal-strip");
+  photos.forEach(([src, c, alt], i) => {
+    const b = document.createElement("button");
+    b.setAttribute("role", "listitem");
+    b.setAttribute("aria-label", `Fotka ${i + 1}: ${c}`);
+    b.innerHTML = `<img src="${thumb(src)}" alt="" loading="lazy">`;
+    b.addEventListener("click", () => show(i));
+    strip.append(b);
+  });
+  let at = 0;
+  function show(i) {
+    at = (i + photos.length) % photos.length;
+    const [src, c, alt] = photos[at];
+    img.src = src;
+    img.alt = alt;
+    cap.textContent = c;
+    count.textContent = `${at + 1} / ${photos.length}`;
+    strip.querySelectorAll("button").forEach((b, j) => b.setAttribute("aria-current", j === at ? "true" : "false"));
+    const t = strip.children[at];
+    strip.scrollLeft = t.offsetLeft - strip.clientWidth / 2 + t.clientWidth / 2;
+    for (const k of [at + 1, at - 1]) new Image().src = photos[(k + photos.length) % photos.length][0];
+  }
+  gal.querySelector(".gal-prev").addEventListener("click", () => show(at - 1));
+  gal.querySelector(".gal-next").addEventListener("click", () => show(at + 1));
+  const full = () => openViewer(photos, at, i => show(i));
+  img.addEventListener("click", full);
+  gal.querySelector(".gal-full").addEventListener("click", full);
+  swipe(gal.querySelector(".gal-stage"), d => show(at + d));
+  show(0);
+}
+
+function swipe(el, go) {
+  let x0 = null;
+  el.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, { passive: true });
+  el.addEventListener("touchend", e => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
+    x0 = null;
+  });
+}
+
+// prohlížení přes celou obrazovku
+const viewer = document.getElementById("viewer");
+const vImg = document.getElementById("v-img");
+let vPhotos = [], vAt = 0, vSync = null, opener = null;
+function vShow(i) {
+  vAt = (i + vPhotos.length) % vPhotos.length;
+  const [src, c, alt] = vPhotos[vAt];
+  vImg.src = src;
+  vImg.alt = alt;
+  document.getElementById("v-cap").textContent = c;
+  document.getElementById("v-count").textContent = `${vAt + 1} / ${vPhotos.length}`;
+  vSync && vSync(vAt);
+}
+function openViewer(photos, i, sync) {
+  opener = document.activeElement;
+  vPhotos = photos; vSync = sync;
+  vShow(i);
+  viewer.hidden = false;
+  document.body.style.overflow = "hidden";
+  document.getElementById("v-close").focus();
+}
+function closeViewer() { viewer.hidden = true; document.body.style.overflow = ""; opener && opener.focus && opener.focus(); }
+document.getElementById("v-close").addEventListener("click", closeViewer);
+document.getElementById("v-prev").addEventListener("click", () => vShow(vAt - 1));
+document.getElementById("v-next").addEventListener("click", () => vShow(vAt + 1));
+document.getElementById("v-stage").addEventListener("click", e => { if (e.target.id === "v-stage") closeViewer(); });
+swipe(document.getElementById("v-stage"), d => vShow(vAt + d));
+document.addEventListener("keydown", e => {
+  if (viewer.hidden) return;
+  if (e.key === "Escape") closeViewer();
+  if (e.key === "ArrowLeft") vShow(vAt - 1);
+  if (e.key === "ArrowRight") vShow(vAt + 1);
+});
+
+entries.forEach(setupFilm);
+document.querySelectorAll(".gal").forEach(setupGallery);
+
+// co ukázat: zápis dne podle odkazu, jinak poslední hotový den
+function route(jump) {
+  const id = location.hash.slice(1);
+  const show = entries.find(e => e.id === id) || entries[0];
+  entries.forEach(e => {
+    // odcházím ze dne: znovunačtením přehrávače se video zastaví
+    if (e !== show && !e.hidden) { e.querySelectorAll("iframe").forEach(f => { f.src = f.src; }); e.querySelectorAll("video").forEach(v => v.pause()); }
+    e.hidden = e !== show;
+  });
+  days.querySelectorAll("a").forEach(a => a.setAttribute("aria-current", a.hash === `#${show.id}` ? "page" : "false"));
+  if (jump) window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", () => route(true));
+route(false);
+</script>

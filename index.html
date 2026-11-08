@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="cs">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cesty s klukama</title>
+<meta name="robots" content="noindex, nofollow"><!-- rodinný deník jen pro ty, kdo mají odkaz -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap">
+<style>
+:root { --bg: #f4f1ec; --paper: #fff; --ink: #1f1c1a; --muted: #6b625a; --line: #e2dad0; --akcent: #c4552a;
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif; --body: "Literata", Georgia, serif; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #141210; --paper: #1d1a17; --ink: #ece6df;
+  --muted: #ab9f93; --line: #353029; --akcent: #ee8a5a; color-scheme: dark; } }
+:root[data-theme="dark"] { --bg: #141210; --paper: #1d1a17; --ink: #ece6df; --muted: #ab9f93; --line: #353029;
+  --akcent: #ee8a5a; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1.125rem/1.6 var(--body);
+  padding: 0 max(16px, env(safe-area-inset-left, 0px)); }
+.wrap { max-width: 960px; margin: 0 auto; padding: 48px 0 72px; display: grid; gap: 36px; }
+.kicker { font: 700 .8rem/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--akcent); }
+h1 { font: 800 clamp(2.6rem, 1.6rem + 5vw, 4.6rem)/.95 var(--display); letter-spacing: -.02em; margin: 10px 0 0; }
+.who { color: var(--muted); margin: 12px 0 0; max-width: 40rem; }
+.kapitoly { display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); }
+.kapitola { display: grid; gap: 6px; align-content: start; text-decoration: none; color: inherit; background: var(--paper);
+  border: 1px solid var(--line); border-radius: 14px; overflow: hidden; padding-bottom: 18px; transition: transform .15s; }
+.kapitola:hover { transform: translateY(-2px); }
+.kapitola img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; margin-bottom: 10px; background: var(--line); }
+.kapitola .kdy, .kapitola h2, .kapitola p { margin: 0 18px; }
+.kdy { font: 700 .78rem/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.kapitola h2 { font: 800 1.6rem/1.1 var(--display); }
+.kapitola p { color: var(--muted); font-size: 1rem; }
+.brzy { color: var(--muted); font-size: 1rem; border-top: 1px solid var(--line); padding-top: 18px; margin: 0; }
+</style>
+<body>
+<div class="wrap">
+  <header>
+    <span class="kicker">Cestovatelský deník</span>
+    <h1>Cesty s klukama</h1>
+    <p class="who">Pavel, Šárka, Máťa a Tomík. Každá cesta je jedna kapitola: den po dni video, fotky a pár řádků.</p>
+  </header>
+  <main class="kapitoly">
+    <a class="kapitola" href="lanzarote-2025/">
+      <img src="obalky/lanzarote-2025.jpg" alt="" loading="lazy">
+      <span class="kdy">12.–24. 8. 2025</span>
+      <h2>Lanzarote s klukama</h2>
+      <p>Ještěrky, sopky, černé pláže a nejlepší koupání. 12 dní, každý s videem, nákresem a tátovým zápisem.</p>
+    </a>
+    <a class="kapitola" href="https://pavelkubiznak.github.io/oslo-s-klukama/">
+      <img src="obalky/oslo.jpg" alt="" loading="lazy">
+      <span class="kdy">24. 10. – 1. 11. 2026</span>
+      <h2>Oslo s klukama</h2>
+      <p>Podzimní Oslo: fjord, muzea, Munch a babí léto na ostrovech.</p>
+    </a>
+  </main>
+  <p class="brzy">Další kapitoly přibudou: Málaga, Džerba, Fuerteventura, Tenerife, Alicante a Gran Canaria.</p>
+</div>
+</body>
+</html>
